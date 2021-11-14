@@ -1,0 +1,6 @@
+#FileLock
+#Fri Nov 12 18:19:20 ART 2021
+server=10.0.0.2\:5191
+hostName=Maru-PC
+method=file
+id=17d1604e1fd7b1ad1b2771386f68941243d72569cf3
