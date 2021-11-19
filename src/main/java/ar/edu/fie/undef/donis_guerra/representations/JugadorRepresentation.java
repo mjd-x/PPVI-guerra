@@ -9,6 +9,10 @@ public class JugadorRepresentation {
         this.activo = activo;
     }
 
+    public JugadorRepresentation(String nombre) {
+        this.nombre = nombre;
+    }
+
     public String getNombre() {
         return nombre;
     }

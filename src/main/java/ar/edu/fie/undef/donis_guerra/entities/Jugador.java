@@ -27,6 +27,10 @@ public class Jugador {
     public Jugador() {
     }
 
+    public Jugador(String nombre) {
+        this.nombre = nombre;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -60,6 +64,6 @@ public class Jugador {
     }
 
     public JugadorRepresentation representation() {
-        return new JugadorRepresentation(nombre, activo);
+        return new JugadorRepresentation(nombre);
     }
 }
