@@ -27,9 +27,11 @@ public class Jugador {
     public Jugador() {
     }
 
-    public Jugador(String nombre) {
-        this.nombre = nombre;
-    }
+//    public Jugador(String nombre) {
+//        this.nombre = nombre;
+//        this.activo = false;
+//        this.mazo = null;
+//    }
 
     public Integer getId() {
         return id;

@@ -32,4 +32,11 @@ public class MazoController {
                 mazoService.findById(mazoId).representation()
         );
     }
+
+    @GetMapping("jugadores/{jugadorId}/mazo")
+    private ResponseEntity<MazoRepresentation> findByJugadorId(@PathVariable Integer jugadorId) {
+        return ResponseEntity.ok(
+                mazoService.findByJugadorId(jugadorId).representation()
+        );
+    }
 }

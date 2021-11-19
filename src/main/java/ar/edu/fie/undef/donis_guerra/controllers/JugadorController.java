@@ -4,9 +4,7 @@ import ar.edu.fie.undef.donis_guerra.representations.JugadorRepresentation;
 import ar.edu.fie.undef.donis_guerra.requests.JugadorRequest;
 import ar.edu.fie.undef.donis_guerra.services.JugadorService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class JugadorController {
@@ -23,5 +21,10 @@ public class JugadorController {
         );
     }
 
-
+    @GetMapping("jugadores/{jugadorId}")
+    private ResponseEntity<JugadorRepresentation> findById(@PathVariable Integer jugadorId) {
+        return ResponseEntity.ok(
+                jugadorService.findById(jugadorId).representation()
+        );
+    }
 }

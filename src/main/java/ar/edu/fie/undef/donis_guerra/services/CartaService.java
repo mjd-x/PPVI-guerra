@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface CartaService {
     List<Carta> findByMazoId(Integer mazoId);
+    List<Carta> findByJugadorId(Integer jugadorId);
 }

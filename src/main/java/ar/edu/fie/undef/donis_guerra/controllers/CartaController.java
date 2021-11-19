@@ -26,4 +26,12 @@ public class CartaController {
                         .map(Carta::representation).collect(Collectors.toList())
         );
     }
+
+    @GetMapping("jugadores/{jugadorId}/mazo/cartas")
+    private ResponseEntity<List<CartaRepresentation>> findByJugadorId(@PathVariable Integer jugadorId) {
+        return ResponseEntity.ok(
+                cartaService.findByJugadorId(jugadorId).stream()
+                        .map(Carta::representation).collect(Collectors.toList())
+        );
+    }
 }

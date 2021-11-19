@@ -8,10 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class MazoServiceImpl implements MazoService {
     private final MazoRepository mazoRepository;
+    private final JugadorService jugadorService;
 
 
-    public MazoServiceImpl(MazoRepository mazoRepository) {
+    public MazoServiceImpl(MazoRepository mazoRepository, JugadorService jugadorService) {
         this.mazoRepository = mazoRepository;
+        this.jugadorService = jugadorService;
     }
 
     @Override
@@ -22,5 +24,10 @@ public class MazoServiceImpl implements MazoService {
     @Override
     public Mazo findById(Integer mazoId) {
         return mazoRepository.findById(mazoId).get();
+    }
+
+    @Override
+    public Mazo findByJugadorId(Integer jugadorId) {
+        return jugadorService.findById(jugadorId).getMazo();
     }
 }
