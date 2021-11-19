@@ -39,6 +39,6 @@ public class Turno {
     }
 
     public TurnoRepresentation representation() {
-        return new TurnoRepresentation(numeroJugadores);
+        return new TurnoRepresentation(id, numeroJugadores);
     }
 }

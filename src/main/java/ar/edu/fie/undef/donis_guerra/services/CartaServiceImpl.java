@@ -25,4 +25,6 @@ public class CartaServiceImpl implements CartaService {
         Integer mazoId = jugadorService.findById(jugadorId).getMazo().getId();
         return mazoService.findById(mazoId).getCartas();
     }
+
+
 }

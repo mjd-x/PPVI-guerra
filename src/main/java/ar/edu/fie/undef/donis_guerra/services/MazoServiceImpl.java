@@ -1,9 +1,13 @@
 package ar.edu.fie.undef.donis_guerra.services;
 
+import ar.edu.fie.undef.donis_guerra.entities.Carta;
 import ar.edu.fie.undef.donis_guerra.entities.Mazo;
 import ar.edu.fie.undef.donis_guerra.repositories.MazoRepository;
 import ar.edu.fie.undef.donis_guerra.requests.MazoRequest;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
+import java.util.List;
 
 @Service
 public class MazoServiceImpl implements MazoService {
@@ -29,5 +33,14 @@ public class MazoServiceImpl implements MazoService {
     @Override
     public Mazo findByJugadorId(Integer jugadorId) {
         return jugadorService.findById(jugadorId).getMazo();
+    }
+
+    @Override
+    public Mazo mezclar(Integer mazoId) {
+        Mazo mazo = mazoRepository.findById(mazoId).get();
+        List<Carta> cartas = mazo.getCartas();
+        Collections.shuffle(cartas);
+        mazo.setCartas(cartas);
+        return mazoRepository.save(mazo);
     }
 }

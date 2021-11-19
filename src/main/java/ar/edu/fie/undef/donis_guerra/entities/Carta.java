@@ -49,6 +49,6 @@ public class Carta {
     }
 
     public CartaRepresentation representation() {
-        return new CartaRepresentation(numero, palo);
+        return new CartaRepresentation(id, numero, palo);
     }
 }

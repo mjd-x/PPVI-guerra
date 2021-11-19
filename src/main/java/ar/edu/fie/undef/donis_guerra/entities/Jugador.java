@@ -14,7 +14,7 @@ public class Jugador {
     private boolean activo;
 
     @OneToOne(cascade = CascadeType.PERSIST)  // un jugador tiene un sub-mazo
-    @JoinColumn(name = "jugador_id")
+    @JoinColumn(name = "mazo_id")
     private Mazo mazo;  // sub-mazo de cada JUGADOR, parte del mazo que era del juego inicialmente
 
 
@@ -27,11 +27,11 @@ public class Jugador {
     public Jugador() {
     }
 
-//    public Jugador(String nombre) {
-//        this.nombre = nombre;
-//        this.activo = false;
-//        this.mazo = null;
-//    }
+    public Jugador(String nombre) {
+        this.nombre = nombre;
+        this.activo = false;
+        this.mazo = null;
+    }
 
     public Integer getId() {
         return id;
@@ -66,6 +66,6 @@ public class Jugador {
     }
 
     public JugadorRepresentation representation() {
-        return new JugadorRepresentation(nombre);
+        return new JugadorRepresentation(id, nombre);
     }
 }

@@ -1,7 +1,9 @@
 package ar.edu.fie.undef.donis_guerra.controllers;
 
 import ar.edu.fie.undef.donis_guerra.entities.Carta;
+import ar.edu.fie.undef.donis_guerra.entities.Mazo;
 import ar.edu.fie.undef.donis_guerra.representations.CartaRepresentation;
+import ar.edu.fie.undef.donis_guerra.representations.MazoMezcladoRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.MazoRepresentation;
 import ar.edu.fie.undef.donis_guerra.requests.MazoRequest;
 import ar.edu.fie.undef.donis_guerra.services.MazoService;
@@ -30,6 +32,13 @@ public class MazoController {
     private ResponseEntity<MazoRepresentation> findById(@PathVariable Integer mazoId) {
         return ResponseEntity.ok(
                 mazoService.findById(mazoId).representation()
+        );
+    }
+
+    @PatchMapping("mazos/{mazoId}/mezclar")
+    private ResponseEntity<MazoMezcladoRepresentation> mezclar(@PathVariable Integer mazoId) {
+        return ResponseEntity.ok(
+                mazoService.mezclar(mazoId).mezcladoRepresentation()
         );
     }
 

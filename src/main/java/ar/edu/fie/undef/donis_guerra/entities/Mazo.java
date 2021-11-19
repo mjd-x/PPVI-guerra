@@ -1,5 +1,6 @@
 package ar.edu.fie.undef.donis_guerra.entities;
 
+import ar.edu.fie.undef.donis_guerra.representations.MazoMezcladoRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.MazoRepresentation;
 
 import javax.persistence.*;
@@ -50,7 +51,11 @@ public class Mazo {
     }
 
     public MazoRepresentation representation() {
-        return new MazoRepresentation(identificacion);
+        return new MazoRepresentation(id, identificacion);
     }
+
+    public MazoMezcladoRepresentation mezcladoRepresentation() {
+        return new MazoMezcladoRepresentation("Se mezclo el mazo correctamente", id, identificacion);
+    };
 
 }
