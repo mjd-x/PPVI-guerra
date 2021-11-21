@@ -2,19 +2,11 @@ package ar.edu.fie.undef.donis_guerra.representations;
 
 public class TurnoRepresentation {
     private Integer id;
-    private Integer numeroJugadores;
+    private String identificacion;
 
-    public TurnoRepresentation(Integer id, Integer numeroJugadores) {
+    public TurnoRepresentation(Integer id, String identificacion) {
         this.id = id;
-        this.numeroJugadores = numeroJugadores;
-    }
-
-    public Integer getNumeroJugadores() {
-        return numeroJugadores;
-    }
-
-    public void setNumeroJugadores(Integer numeroJugadores) {
-        this.numeroJugadores = numeroJugadores;
+        this.identificacion = identificacion;
     }
 
     public Integer getId() {
@@ -23,5 +15,13 @@ public class TurnoRepresentation {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getIdentificacion() {
+        return identificacion;
+    }
+
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
     }
 }

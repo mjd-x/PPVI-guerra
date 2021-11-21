@@ -41,4 +41,21 @@ public class JugadorController {
                         stream().map(Jugador::representation).collect(Collectors.toList())
         );
     }
+
+    @GetMapping("turnos/{turnoId}/jugadores")
+    private ResponseEntity<List<JugadorRepresentation>> findByTurnoId(@PathVariable Integer turnoId) {
+        return ResponseEntity.ok(
+                jugadorService.findByTurnoId(turnoId).stream()
+                        .map(Jugador::representation).collect(Collectors.toList())
+        );
+    }
+
+    @GetMapping("turnos/{turnoId}/jugadores/activos/")
+    private ResponseEntity<List<JugadorRepresentation>> findActivoByTurnoId(
+            @RequestParam boolean activo, @PathVariable Integer turnoId) {
+        return ResponseEntity.ok(
+                jugadorService.findActivoByTurnoId(turnoId, activo).
+                        stream().map(Jugador::representation).collect(Collectors.toList())
+        );
+    }
 }

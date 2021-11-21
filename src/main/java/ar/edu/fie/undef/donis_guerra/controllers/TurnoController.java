@@ -21,7 +21,7 @@ public class TurnoController {
         );
     }
 
-    @GetMapping("turnos/{tunoId}")
+    @GetMapping("turnos/{turnoId}")
     private ResponseEntity<TurnoRepresentation> findById(@PathVariable Integer turnoId) {
         return ResponseEntity.ok(
                 turnoService.findById(turnoId).representation()

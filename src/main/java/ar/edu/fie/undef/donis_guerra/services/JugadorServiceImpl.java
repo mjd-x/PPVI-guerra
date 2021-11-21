@@ -8,13 +8,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class JugadorServiceImpl implements JugadorService {
     private final JugadorRepository jugadorRepository;
+    private final TurnoService turnoService;
 
-    public JugadorServiceImpl(JugadorRepository jugadorRepository) {
+    public JugadorServiceImpl(JugadorRepository jugadorRepository, TurnoService turnoService) {
         this.jugadorRepository = jugadorRepository;
+        this.turnoService = turnoService;
     }
 
     @Override
@@ -37,4 +40,18 @@ public class JugadorServiceImpl implements JugadorService {
     public List<Jugador> findByActivo(boolean activo) {
         return jugadorRepository.findJugadorByActivo(activo);
     }
+
+    @Override
+    public List<Jugador> findByTurnoId(Integer turnoId) {
+        return turnoService.findById(turnoId).getJugadores();
+    }
+
+    @Override
+    public List<Jugador> findActivoByTurnoId(Integer turnoId, boolean activo) {
+        List<Jugador> jugadores = findByTurnoId(turnoId);
+        return jugadores.stream()
+                .filter(jugador -> jugador.isActivo() == activo)
+                .collect(Collectors.toList());
+    }
+
 }

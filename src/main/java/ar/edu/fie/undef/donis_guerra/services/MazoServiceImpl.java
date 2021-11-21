@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class MazoServiceImpl implements MazoService {
@@ -37,10 +38,19 @@ public class MazoServiceImpl implements MazoService {
 
     @Override
     public Mazo mezclar(Integer mazoId) {
-        Mazo mazo = mazoRepository.findById(mazoId).get();
+        Mazo mazo = findById(mazoId);
         List<Carta> cartas = mazo.getCartas();
+        System.out.println(cartas.stream()
+                .map(Carta::getId).collect(Collectors.toList()));
         Collections.shuffle(cartas);
+        System.out.println(cartas.stream()
+                .map(Carta::getId).collect(Collectors.toList()));
         mazo.setCartas(cartas);
+        System.out.println(mazo.getCartas().stream()
+                .map(Carta::getId).collect(Collectors.toList()));
+        mazoRepository.save(mazo);
+        System.out.println(mazo.getCartas().stream()
+                .map(Carta::getId).collect(Collectors.toList()));
         return mazoRepository.save(mazo);
     }
 }

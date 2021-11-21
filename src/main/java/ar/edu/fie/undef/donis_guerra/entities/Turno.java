@@ -2,10 +2,8 @@ package ar.edu.fie.undef.donis_guerra.entities;
 
 import ar.edu.fie.undef.donis_guerra.representations.TurnoRepresentation;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Turno {
@@ -13,10 +11,15 @@ public class Turno {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer numeroJugadores;
+    private String identificacion;
 
-    public Turno(Integer numeroJugadores) {
-        this.numeroJugadores = numeroJugadores;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "jugador_id")
+    private List<Jugador> jugadores;
+
+    public Turno(String identificacion, List<Jugador> jugadores) {
+        this.identificacion = identificacion;
+        this.jugadores = jugadores;
     }
 
     public Turno() {
@@ -30,15 +33,23 @@ public class Turno {
         this.id = id;
     }
 
-    public Integer getNumeroJugadores() {
-        return numeroJugadores;
+    public String getIdentificacion() {
+        return identificacion;
     }
 
-    public void setNumeroJugadores(Integer numeroJugadores) {
-        this.numeroJugadores = numeroJugadores;
+    public void setIdentificacion(String identificacion) {
+        this.identificacion = identificacion;
+    }
+
+    public List<Jugador> getJugadores() {
+        return jugadores;
+    }
+
+    public void setJugadores(List<Jugador> jugadores) {
+        this.jugadores = jugadores;
     }
 
     public TurnoRepresentation representation() {
-        return new TurnoRepresentation(id, numeroJugadores);
+        return new TurnoRepresentation(id, identificacion);
     }
 }

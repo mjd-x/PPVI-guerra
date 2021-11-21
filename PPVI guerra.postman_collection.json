@@ -1,0 +1,513 @@
+{
+	"info": {
+		"_postman_id": "e5282b5a-f608-45d4-b2f6-1f780d4f2f3f",
+		"name": "PPVI guerra",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "mazos",
+			"item": [
+				{
+					"name": "mazos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"test\",\r\n    \"cartas\": [\r\n        {\"numero\": 1, \"palo\": \"ORO\"}, \r\n        {\"numero\": 11, \"palo\": \"BASTO\"},\r\n        {\"numero\": 5, \"palo\": \"COPA\"},\r\n        {\"numero\": 9, \"palo\": \"ORO\"},\r\n        {\"numero\": 2, \"palo\": \"ESPADA\"}\r\n        ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/mazos",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"mazos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mazos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/mazos/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"mazos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mezclar mazo",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"test\",\r\n    \"cartas\": [{\"numero\": 1, \"palo\": \"ORO\"}, {\"numero\": 11, \"palo\": \"BASTO\"}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/mazos/:id/mezclar",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"mazos",
+								":id",
+								"mezclar"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cartas",
+			"item": [
+				{
+					"name": "cartas",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"test\",\r\n    \"cartas\": {\"numero\": 1, \"palo\": \"ORO\"}, {\"nuemero\": 11, \"palo\": \"BASTO\"}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/mazos",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"mazos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cartas en mazo",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"test\",\r\n    \"cartas\": [{\"numero\": 1, \"palo\": \"ORO\"}, {\"numero\": 11, \"palo\": \"BASTO\"}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/mazos/:id/cartas",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"mazos",
+								":id",
+								"cartas"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "jugadores",
+			"item": [
+				{
+					"name": "jugadores",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"persona2\",\r\n    \"activo\": true,\r\n    \"mazo\": {\r\n            \"identificacion\": \"segundo_mazo_jugador\",\r\n            \"cartas\": [{\"numero\": 12, \"palo\": \"ESPADA\"}, {\"numero\": 12, \"palo\": \"COPA\"}]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/jugadores",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jugadores"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "jugadores",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"marina\",\r\n    \"activo\": false,\r\n    \"mazo\": {\r\n            \"identificacion\": \"mazo_jugador_test\",\r\n            \"cartas\": [{\"numero\": 5, \"palo\": \"ESPADA\"}, {\"numero\": 11, \"palo\": \"BASTO\"}]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/jugadores/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jugadores",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mazo de jugador",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"marina\",\r\n    \"activo\": false,\r\n    \"mazo\": {\r\n            \"identificacion\": \"mazo_jugador_test\",\r\n            \"cartas\": [{\"numero\": 5, \"palo\": \"ESPADA\"}, {\"numero\": 11, \"palo\": \"BASTO\"}]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/jugadores/1/mazo",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jugadores",
+								"1",
+								"mazo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "cartas en mazo de jugador",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"marina\",\r\n    \"activo\": false,\r\n    \"mazo\": {\r\n            \"identificacion\": \"mazo_jugador_test\",\r\n            \"cartas\": [{\"numero\": 5, \"palo\": \"ESPADA\"}, {\"numero\": 11, \"palo\": \"BASTO\"}]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/jugadores/:id/mazo/cartas",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jugadores",
+								":id",
+								"mazo",
+								"cartas"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "jugadores activos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"persona2\",\r\n    \"activo\": true,\r\n    \"mazo\": {\r\n            \"identificacion\": \"segundo_mazo_jugador\",\r\n            \"cartas\": [{\"numero\": 12, \"palo\": \"ESPADA\"}, {\"numero\": 12, \"palo\": \"COPA\"}]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/jugadores/?activo=false",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"jugadores",
+								""
+							],
+							"query": [
+								{
+									"key": "activo",
+									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "turnos",
+			"item": [
+				{
+					"name": "turnos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"test_turno_2\",\r\n    \"jugadores\": [\r\n                    {\r\n                        \"nombre\": \"persona3\",\r\n                        \"activo\": true,\r\n                        \"mazo\": {\r\n                            \"identificacion\": \"tercer_mazo_jugador\",\r\n                            \"cartas\": [{\"numero\": 12, \"palo\": \"ESPADA\"}, {\"numero\": 12, \"palo\": \"COPA\"}]\r\n                                }\r\n                    },\r\n                    {\r\n                        \"nombre\": \"persona4\",\r\n                        \"activo\": false,\r\n                        \"mazo\": {\r\n                            \"identificacion\": \"cuarto_mazo_jugador\",\r\n                            \"cartas\": [{\"numero\": 5, \"palo\": \"ESPADA\"}, {\"numero\": 6, \"palo\": \"BASTO\"}]\r\n                                }\r\n                    }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/turnos",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"turnos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "turnos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"test_turno\",\r\n    \"jugadores\": [{\"id\": 1}, {\"id\": 33}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/turnos/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"turnos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "jugadores en turno",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"test_turno\",\r\n    \"jugadores\": [{\"id\": 1}, {\"id\": 33}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/turnos/:id/jugadores",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"turnos",
+								":id",
+								"jugadores"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "jugadores activos en turno",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"test_turno\",\r\n    \"jugadores\": [{\"id\": 1}, {\"id\": 33}]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/turnos/:id/jugadores/activos/?activo=true",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"turnos",
+								":id",
+								"jugadores",
+								"activos",
+								""
+							],
+							"query": [
+								{
+									"key": "activo",
+									"value": "true"
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
