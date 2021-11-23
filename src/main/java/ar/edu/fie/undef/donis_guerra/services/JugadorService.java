@@ -13,5 +13,7 @@ public interface JugadorService {
     Jugador findById(Integer jugadorId);
     List<Jugador> findByActivo(boolean activo);
     List<Jugador> findByTurnoId(Integer turnoId);
-    List<Jugador> findActivoByTurnoId(Integer turnoId, boolean activo);
+    List<Jugador> findActivoByTurnoId(Integer turnoId);
+    List<Jugador> findByJuegoId(Integer juegoId);
+    List<Jugador> findActivobyJuegoId(Integer juegoId);
 }

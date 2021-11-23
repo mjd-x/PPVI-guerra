@@ -14,7 +14,7 @@ public class Turno {
     private String identificacion;
 
     @OneToMany(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "jugador_id")
+    @JoinColumn(name = "turno_id")
     private List<Jugador> jugadores;
 
     public Turno(String identificacion, List<Jugador> jugadores) {

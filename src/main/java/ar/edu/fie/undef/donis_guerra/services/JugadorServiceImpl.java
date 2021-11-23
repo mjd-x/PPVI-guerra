@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 public class JugadorServiceImpl implements JugadorService {
     private final JugadorRepository jugadorRepository;
     private final TurnoService turnoService;
+    private final JuegoService juegoService;
 
-    public JugadorServiceImpl(JugadorRepository jugadorRepository, TurnoService turnoService) {
+    public JugadorServiceImpl(JugadorRepository jugadorRepository, TurnoService turnoService, JuegoService juegoService) {
         this.jugadorRepository = jugadorRepository;
         this.turnoService = turnoService;
+        this.juegoService = juegoService;
     }
 
     @Override
@@ -47,10 +49,23 @@ public class JugadorServiceImpl implements JugadorService {
     }
 
     @Override
-    public List<Jugador> findActivoByTurnoId(Integer turnoId, boolean activo) {
+    public List<Jugador> findActivoByTurnoId(Integer turnoId) {
         List<Jugador> jugadores = findByTurnoId(turnoId);
         return jugadores.stream()
-                .filter(jugador -> jugador.isActivo() == activo)
+                .filter(Jugador::isActivo)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Jugador> findByJuegoId(Integer juegoId) {
+        return juegoService.findById(juegoId).getJugadores();
+    }
+
+    @Override
+    public List<Jugador> findActivobyJuegoId(Integer juegoId) {
+        List<Jugador> jugadores = findByJuegoId(juegoId);
+        return jugadores.stream()
+                .filter(Jugador::isActivo)
                 .collect(Collectors.toList());
     }
 

@@ -1,19 +1,20 @@
 package ar.edu.fie.undef.donis_guerra.requests;
-import ar.edu.fie.undef.donis_guerra.entities.Turno;
+
+import ar.edu.fie.undef.donis_guerra.entities.Juego;
+import ar.edu.fie.undef.donis_guerra.entities.Mazo;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TurnoRequest {
+public class JuegoRequest {
     private String identificacion;
+    private Mazo mazo;
     private List<JugadorRequest> jugadores;
 
-    public TurnoRequest(String identificacion, List<JugadorRequest> jugadores) {
+    public JuegoRequest(String identificacion, Mazo mazo, List<JugadorRequest> jugadores) {
         this.identificacion = identificacion;
+        this.mazo = mazo;
         this.jugadores = jugadores;
-    }
-
-    public TurnoRequest() {
     }
 
     public String getIdentificacion() {
@@ -24,6 +25,14 @@ public class TurnoRequest {
         this.identificacion = identificacion;
     }
 
+    public Mazo getMazo() {
+        return mazo;
+    }
+
+    public void setMazo(Mazo mazo) {
+        this.mazo = mazo;
+    }
+
     public List<JugadorRequest> getJugadores() {
         return jugadores;
     }
@@ -32,9 +41,10 @@ public class TurnoRequest {
         this.jugadores = jugadores;
     }
 
-    public Turno construct() {
-        return new Turno(
+    public Juego construct() {
+        return new Juego(
                 identificacion,
+                mazo,
                 jugadores.stream().map(JugadorRequest::construct).collect(Collectors.toList())
         );
     }

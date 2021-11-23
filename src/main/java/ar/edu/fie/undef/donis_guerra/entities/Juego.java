@@ -13,9 +13,9 @@ public class Juego {
 
     private String identificacion;
 
-    @OneToMany  // un juego tiene varios turnos
+    @OneToMany(cascade = CascadeType.PERSIST)  // un juego tiene varios turnos
     @JoinColumn(name = "juego_id")
-    private List<Turno> turno;
+    private List<Turno> turnos;
 
     @OneToOne(cascade = CascadeType.PERSIST) // un juego tiene un mazo (que despues se reparte)
     @JoinColumn(name = "juego_id")
@@ -25,14 +25,21 @@ public class Juego {
     @JoinColumn(name = "juego_id")
     private List<Jugador> jugadores;
 
-    public Juego(String identificacion, List<Turno> turno, Mazo mazo, List<Jugador> jugadores) {
+    public Juego(String identificacion, List<Turno> turnos, Mazo mazo, List<Jugador> jugadores) {
         this.identificacion = identificacion;
-        this.turno = turno;
+        this.turnos = turnos;
         this.mazo = mazo;
         this.jugadores = jugadores;
     }
 
     public Juego() {
+    }
+
+    // otro constructor sin turnos porque no tiene mucho sentido inicializar el juego con turnos
+    public Juego(String identificacion, Mazo mazo, List<Jugador> jugadores) {
+        this.identificacion = identificacion;
+        this.mazo = mazo;
+        this.jugadores = jugadores;
     }
 
     public Integer getId() {
@@ -51,12 +58,12 @@ public class Juego {
         this.identificacion = identificacion;
     }
 
-    public List<Turno> getTurno() {
-        return turno;
+    public List<Turno> getTurnos() {
+        return turnos;
     }
 
-    public void setTurno(List<Turno> turno) {
-        this.turno = turno;
+    public void setTurnos(List<Turno> turnos) {
+        this.turnos = turnos;
     }
 
     public Mazo getMazo() {
@@ -76,6 +83,6 @@ public class Juego {
     }
 
     public JuegoRepresentation representation() {
-        return new JuegoRepresentation(identificacion);
+        return new JuegoRepresentation(id, identificacion);
     }
 }

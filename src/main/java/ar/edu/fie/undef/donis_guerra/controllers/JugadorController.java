@@ -4,11 +4,8 @@ import ar.edu.fie.undef.donis_guerra.entities.Jugador;
 import ar.edu.fie.undef.donis_guerra.representations.JugadorRepresentation;
 import ar.edu.fie.undef.donis_guerra.requests.JugadorRequest;
 import ar.edu.fie.undef.donis_guerra.services.JugadorService;
-import org.apache.coyote.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -51,11 +48,26 @@ public class JugadorController {
     }
 
     @GetMapping("turnos/{turnoId}/jugadores/activos/")
-    private ResponseEntity<List<JugadorRepresentation>> findActivoByTurnoId(
-            @RequestParam boolean activo, @PathVariable Integer turnoId) {
+    private ResponseEntity<List<JugadorRepresentation>> findActivoByTurnoId(@PathVariable Integer turnoId) {
         return ResponseEntity.ok(
-                jugadorService.findActivoByTurnoId(turnoId, activo).
+                jugadorService.findActivoByTurnoId(turnoId).
                         stream().map(Jugador::representation).collect(Collectors.toList())
+        );
+    }
+
+    @GetMapping("juegos/{juegoId}/jugadores")
+    private ResponseEntity<List<JugadorRepresentation>> findByJuegoId(@PathVariable Integer juegoId) {
+        return ResponseEntity.ok(
+                jugadorService.findByJuegoId(juegoId).stream()
+                        .map(Jugador::representation).collect(Collectors.toList())
+        );
+    }
+
+    @GetMapping("juegos/{juegoId}/jugadores/activos")
+    private ResponseEntity<List<JugadorRepresentation>> findActivoByJuegoId(@PathVariable Integer juegoId) {
+        return ResponseEntity.ok(
+                jugadorService.findActivobyJuegoId(juegoId).stream()
+                        .map(Jugador::representation).collect(Collectors.toList())
         );
     }
 }
