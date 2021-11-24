@@ -35,6 +35,6 @@ public class JuegoServiceImpl implements JuegoService {
 
     @Override
     public Juego iniciarJuego(Integer juegoId) {
-        return null;
+        return juegoRepository.save(findById(juegoId).iniciarJuego());
     }
 }

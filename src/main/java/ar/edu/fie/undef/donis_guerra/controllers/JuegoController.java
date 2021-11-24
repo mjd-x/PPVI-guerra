@@ -1,6 +1,7 @@
 package ar.edu.fie.undef.donis_guerra.controllers;
 
 import ar.edu.fie.undef.donis_guerra.entities.Juego;
+import ar.edu.fie.undef.donis_guerra.representations.JuegoIniciadoRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.JuegoRepresentation;
 import ar.edu.fie.undef.donis_guerra.requests.JuegoRequest;
 import ar.edu.fie.undef.donis_guerra.services.JuegoService;
@@ -41,9 +42,9 @@ public class JuegoController {
     }
 
     @PostMapping("juegos/{juegoId}/iniciar")
-    private ResponseEntity<JuegoRepresentation> iniciarJuego(@PathVariable Integer juegoId) {
+    private ResponseEntity<JuegoIniciadoRepresentation> iniciarJuego(@PathVariable Integer juegoId) {
         return ResponseEntity.ok(
-                juegoService.iniciarJuego(juegoId).representation()
+                juegoService.iniciarJuego(juegoId).iniciadoRepresentation()
         );
     }
 }

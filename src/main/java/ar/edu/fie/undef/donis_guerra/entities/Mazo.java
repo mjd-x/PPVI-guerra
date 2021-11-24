@@ -2,9 +2,13 @@ package ar.edu.fie.undef.donis_guerra.entities;
 
 import ar.edu.fie.undef.donis_guerra.representations.MazoMezcladoRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.MazoRepresentation;
+import com.google.common.collect.Lists;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Mazo {
@@ -24,6 +28,10 @@ public class Mazo {
     }
 
     public Mazo() {
+    }
+
+    public Mazo(List<Carta> cartas) {
+        this.cartas = cartas;
     }
 
     public Integer getId() {
@@ -56,6 +64,24 @@ public class Mazo {
 
     public MazoMezcladoRepresentation mezcladoRepresentation() {
         return new MazoMezcladoRepresentation("Se mezclo el mazo correctamente", id, identificacion);
-    };
+    }
 
+    public List<Mazo> repartir(Integer numeroJugadores) {
+        // mezcl las cartas
+        Collections.shuffle(cartas);
+        Collections.shuffle(cartas);
+
+        // cast a float y redondeo por si no da entero el resultado
+        float cantidad = cartas.size() / (float) numeroJugadores;
+
+        // guava: partition Returns consecutive sublists of a list, each of the same size
+        List<List<Carta>> listas = Lists.partition(cartas, Math.round(cantidad));
+
+        // crea lista de submazos para repartir con las cartas
+        List<Mazo> mazos = new ArrayList<>();
+        for (List<Carta> submazo : listas) {
+            mazos.add(new Mazo("submazo_jugador", submazo));
+        }
+        return mazos;
+    }
 }

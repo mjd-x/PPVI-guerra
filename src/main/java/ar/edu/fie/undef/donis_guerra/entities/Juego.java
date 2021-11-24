@@ -1,8 +1,10 @@
 package ar.edu.fie.undef.donis_guerra.entities;
 
+import ar.edu.fie.undef.donis_guerra.representations.JuegoIniciadoRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.JuegoRepresentation;
 
 import javax.persistence.*;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -87,8 +89,36 @@ public class Juego {
         return new JuegoRepresentation(id, identificacion);
     }
 
+    public JuegoIniciadoRepresentation iniciadoRepresentation() {
+        return new JuegoIniciadoRepresentation("Se repartio el mazo entre los jugadores",
+                id, identificacion);
+    }
+
     public Integer getJugadoresActivos() {
         return (int) jugadores.stream()
                 .filter(Jugador::isActivo).count();
+    }
+
+    public Juego iniciarJuego() {
+        // marca todos los jugadores como activos (empiezan a jugar)
+        jugadores.forEach(jugador -> jugador.setActivo(true));
+
+        // trae lista de lista con los submazos para cada jugador
+        List<Mazo> mazos = mazo.repartir(jugadores.size());
+
+        // repartir el mazo, itera por las dos listas al mismo tiempo
+        Iterator<Jugador> JugadorIterator = jugadores.iterator();
+        Iterator<Mazo> MazoIterator = mazos.iterator();
+
+        // asigna un submazo a cada jugador
+        while (JugadorIterator.hasNext() && MazoIterator.hasNext()) {
+            Jugador jugador = JugadorIterator.next();
+            Mazo submazo = MazoIterator.next();
+
+            jugador.setMazo(submazo);
+        }
+
+        // devuelve el objeto cambiado
+        return this;
     }
 }
