@@ -4,6 +4,7 @@ import ar.edu.fie.undef.donis_guerra.representations.JuegoRepresentation;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 public class Juego {
@@ -84,5 +85,10 @@ public class Juego {
 
     public JuegoRepresentation representation() {
         return new JuegoRepresentation(id, identificacion);
+    }
+
+    public Integer getJugadoresActivos() {
+        return (int) jugadores.stream()
+                .filter(Jugador::isActivo).count();
     }
 }
