@@ -9,4 +9,6 @@ public interface MazoService {
     Mazo findById(Integer mazoId);
     Mazo findByJugadorId(Integer jugadorId);
     Mazo mezclar(Integer mazoId);
+    Mazo save(Mazo mazo);
+    Integer count();
 }

@@ -62,10 +62,6 @@ public class Mazo {
         return new MazoRepresentation(id, identificacion);
     }
 
-    public MazoMezcladoRepresentation mezcladoRepresentation() {
-        return new MazoMezcladoRepresentation("Se mezclo el mazo correctamente", id, identificacion);
-    }
-
     public List<Mazo> repartir(Integer numeroJugadores) {
         // mezcl las cartas
         Collections.shuffle(cartas);
@@ -83,5 +79,13 @@ public class Mazo {
             mazos.add(new Mazo("submazo_jugador", submazo));
         }
         return mazos;
+    }
+
+    public Carta primeraCarta() {
+        return cartas.remove(0);
+    }
+
+    public Integer getCantidadCartas() {
+        return cartas.size();
     }
 }

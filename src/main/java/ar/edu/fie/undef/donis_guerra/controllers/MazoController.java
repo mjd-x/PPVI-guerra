@@ -35,13 +35,6 @@ public class MazoController {
         );
     }
 
-    @PatchMapping("mazos/{mazoId}/mezclar")
-    private ResponseEntity<MazoMezcladoRepresentation> mezclar(@PathVariable Integer mazoId) {
-        return ResponseEntity.ok(
-                mazoService.mezclar(mazoId).mezcladoRepresentation()
-        );
-    }
-
     @GetMapping("jugadores/{jugadorId}/mazo")
     private ResponseEntity<MazoRepresentation> findByJugadorId(@PathVariable Integer jugadorId) {
         return ResponseEntity.ok(

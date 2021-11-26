@@ -53,4 +53,14 @@ public class MazoServiceImpl implements MazoService {
                 .map(Carta::getId).collect(Collectors.toList()));
         return mazoRepository.save(mazo);
     }
+
+    @Override
+    public Mazo save(Mazo mazo) {
+        return mazoRepository.save(mazo);
+    }
+
+    @Override
+    public Integer count() {
+        return mazoRepository.countAllBy();
+    }
 }
