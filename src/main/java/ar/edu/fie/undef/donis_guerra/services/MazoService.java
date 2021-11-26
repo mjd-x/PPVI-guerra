@@ -11,7 +11,6 @@ public interface MazoService {
     Optional<Mazo> findByIdOrNull(Integer mazoId);
     Mazo findById(Integer mazoId);
     Mazo findByJugadorId(Integer jugadorId);
-    Mazo mezclar(Integer mazoId);
     Mazo save(Mazo mazo);
     Integer count();
     Mazo clonarInicial();

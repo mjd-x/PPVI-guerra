@@ -64,7 +64,6 @@ public class Mazo {
     public List<Mazo> repartir(Integer numeroJugadores) {
         // mezcl las cartas
         Collections.shuffle(cartas);
-        Collections.shuffle(cartas);
 
         // cast a float y redondeo por si no da entero el resultado
         float cantidad = cartas.size() / (float) numeroJugadores;
@@ -91,6 +90,6 @@ public class Mazo {
     }
 
     public static Mazo clonar(Mazo mazo) {
-        return new Mazo("mazo_juego", mazo.cartas);
+        return new Mazo("mazo_juego", Carta.clonar(mazo.cartas));
     }
 }

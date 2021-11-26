@@ -12,4 +12,5 @@ public interface JuegoService {
     Juego findById(Integer juegoId);
     Juego iniciarJuego(Integer juegoId);
     List<Juego> findAllByTerminado();
+    Juego cargarMazo(Integer juegoId);
 }

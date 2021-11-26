@@ -4,6 +4,8 @@ import ar.edu.fie.undef.donis_guerra.entities.Palo;
 import ar.edu.fie.undef.donis_guerra.representations.CartaRepresentation;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Carta {
@@ -50,5 +52,15 @@ public class Carta {
 
     public CartaRepresentation representation() {
         return new CartaRepresentation(id, numero, palo);
+    }
+
+    public static List<Carta> clonar(List<Carta> cartas) {
+        List<Carta> cartas_clone = new ArrayList<>();
+
+        for (Carta carta : cartas) {
+            cartas_clone.add(new Carta(carta.numero, carta.palo));
+        }
+
+        return cartas_clone;
     }
 }

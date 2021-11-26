@@ -45,11 +45,22 @@ public class JuegoServiceImpl implements JuegoService {
     }
 
     @Override
+    public Juego cargarMazo(Integer juegoId) {
+        Juego juego = findById(juegoId);
+        juego.setMazo(mazoService.clonarInicial());
+        return juegoRepository.save(juego);
+    }
+
+
+    @Override
     public Juego iniciarJuego(Integer juegoId) {
         // busca el juego
-        Juego juego = findById(juegoId);
+        Juego juego = cargarMazo(juegoId);
+
         // le asigna una copia del mazo inicial
-        juego.setMazo(mazoService.clonarInicial());  // TODO esta parte no funciona por dependencia ciclica
+//        juego.setMazo(mazoService.clonarInicial());
+//        // guardo el juego con el mazo
+//        juegoRepository.save(juego);
         //incia el juego
         return juegoRepository.save(juego.iniciarJuego());
     }

@@ -14,7 +14,7 @@ public class Jugador {
     private boolean activo;
 
     @OneToOne(cascade = CascadeType.PERSIST)  // un jugador tiene un sub-mazo
-    @JoinColumn(name = "jugador_id")
+    @JoinColumn(name = "mazo_id")
     private Mazo mazo;  // sub-mazo de cada JUGADOR, parte del mazo que era del juego inicialmente
 
 
