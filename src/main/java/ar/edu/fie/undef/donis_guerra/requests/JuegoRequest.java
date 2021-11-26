@@ -8,10 +8,12 @@ import java.util.stream.Collectors;
 
 public class JuegoRequest {
     private String identificacion;
+    private Mazo mazo;
     private List<JugadorRequest> jugadores;
 
-    public JuegoRequest(String identificacion, List<JugadorRequest> jugadores) {
+    public JuegoRequest(String identificacion, Mazo mazo, List<JugadorRequest> jugadores) {
         this.identificacion = identificacion;
+        this.mazo = mazo;
         this.jugadores = jugadores;
     }
 
@@ -34,7 +36,16 @@ public class JuegoRequest {
     public Juego construct() {
         return new Juego(
                 identificacion,
+                mazo,
                 jugadores.stream().map(JugadorRequest::construct).collect(Collectors.toList())
         );
+    }
+
+    public Mazo getMazo() {
+        return mazo;
+    }
+
+    public void setMazo(Mazo mazo) {
+        this.mazo = mazo;
     }
 }

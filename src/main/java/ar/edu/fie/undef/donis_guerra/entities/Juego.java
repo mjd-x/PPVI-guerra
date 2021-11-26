@@ -21,7 +21,7 @@ public class Juego {
     private List<Turno> turnos;
 
     @OneToOne(cascade = CascadeType.PERSIST) // un juego tiene un mazo (que despues se reparte)
-    @JoinColumn(name = "juego_id")
+    @JoinColumn(name = "mazo_id")
     private Mazo mazo;  // mazo inicial del juego que se reparte entre los jugadores
 
     @OneToMany(cascade = CascadeType.PERSIST)
@@ -40,6 +40,12 @@ public class Juego {
 
     public Juego(String identificacion, List<Jugador> jugadores) {
         this.identificacion = identificacion;
+        this.jugadores = jugadores;
+    }
+
+    public Juego(String identificacion, Mazo mazo, List<Jugador> jugadores) {
+        this.identificacion = identificacion;
+        this.mazo = mazo;
         this.jugadores = jugadores;
     }
 

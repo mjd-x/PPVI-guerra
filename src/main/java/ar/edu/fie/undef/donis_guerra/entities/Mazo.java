@@ -80,10 +80,12 @@ public class Mazo {
         return mazos;
     }
 
+    // TODO para armar el metodo del turno en JuegoServiceImpl
     public Carta primeraCarta() {
         return cartas.remove(0);
     }
 
+    // TODO para verificar si ya perdio el jugador en el metodo del turno en JuegoServiceImpl
     public Integer getCantidadCartas() {
         return cartas.size();
     }

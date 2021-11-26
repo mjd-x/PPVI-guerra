@@ -1,10 +1,10 @@
 package ar.edu.fie.undef.donis_guerra.services;
 
 import ar.edu.fie.undef.donis_guerra.entities.Juego;
-import ar.edu.fie.undef.donis_guerra.entities.Mazo;
 import ar.edu.fie.undef.donis_guerra.exceptions.NotFoundException;
 import ar.edu.fie.undef.donis_guerra.repositories.JuegoRepository;
 import ar.edu.fie.undef.donis_guerra.requests.JuegoRequest;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,11 +14,11 @@ import java.util.stream.Collectors;
 @Service
 public class JuegoServiceImpl implements JuegoService {
     private final JuegoRepository juegoRepository;
-//    private final MazoService mazoService;
+    private final MazoService mazoService;
 
-    public JuegoServiceImpl(JuegoRepository juegoRepository/*, MazoService mazoService*/) {
+    public JuegoServiceImpl(JuegoRepository juegoRepository, @Lazy MazoService mazoService) {
         this.juegoRepository = juegoRepository;
-//        this.mazoService = mazoService;
+        this.mazoService = mazoService;
     }
 
     @Override
@@ -49,7 +49,7 @@ public class JuegoServiceImpl implements JuegoService {
         // busca el juego
         Juego juego = findById(juegoId);
         // le asigna una copia del mazo inicial
-//        juego.setMazo(mazoService.clonarInicial());
+        juego.setMazo(mazoService.clonarInicial());  // TODO esta parte no funciona por dependencia ciclica
         //incia el juego
         return juegoRepository.save(juego.iniciarJuego());
     }

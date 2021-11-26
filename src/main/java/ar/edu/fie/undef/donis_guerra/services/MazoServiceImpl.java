@@ -5,6 +5,7 @@ import ar.edu.fie.undef.donis_guerra.entities.Mazo;
 import ar.edu.fie.undef.donis_guerra.exceptions.NotFoundException;
 import ar.edu.fie.undef.donis_guerra.repositories.MazoRepository;
 import ar.edu.fie.undef.donis_guerra.requests.MazoRequest;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
