@@ -38,12 +38,11 @@ public class Juego {
     public Juego() {
     }
 
-    // otro constructor sin turnos porque no tiene mucho sentido inicializar el juego con turnos
-    public Juego(String identificacion, Mazo mazo, List<Jugador> jugadores) {
+    public Juego(String identificacion, List<Jugador> jugadores) {
         this.identificacion = identificacion;
-        this.mazo = mazo;
         this.jugadores = jugadores;
     }
+
 
     public Integer getId() {
         return id;

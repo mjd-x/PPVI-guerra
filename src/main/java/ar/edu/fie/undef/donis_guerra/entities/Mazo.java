@@ -8,7 +8,6 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Entity
 public class Mazo {
@@ -87,5 +86,9 @@ public class Mazo {
 
     public Integer getCantidadCartas() {
         return cartas.size();
+    }
+
+    public static Mazo clonar(Mazo mazo) {
+        return new Mazo("mazo_juego", mazo.cartas);
     }
 }

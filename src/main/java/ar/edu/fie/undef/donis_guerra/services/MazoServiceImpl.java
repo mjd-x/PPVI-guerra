@@ -2,12 +2,14 @@ package ar.edu.fie.undef.donis_guerra.services;
 
 import ar.edu.fie.undef.donis_guerra.entities.Carta;
 import ar.edu.fie.undef.donis_guerra.entities.Mazo;
+import ar.edu.fie.undef.donis_guerra.exceptions.NotFoundException;
 import ar.edu.fie.undef.donis_guerra.repositories.MazoRepository;
 import ar.edu.fie.undef.donis_guerra.requests.MazoRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,8 +29,14 @@ public class MazoServiceImpl implements MazoService {
     }
 
     @Override
+    public Optional<Mazo> findByIdOrNull(Integer mazoId) {
+        return mazoRepository.findById(mazoId);
+    }
+
+    @Override
     public Mazo findById(Integer mazoId) {
-        return mazoRepository.findById(mazoId).get();
+        return findByIdOrNull(mazoId)
+                .orElseThrow(() -> new NotFoundException("No se encontro el mazo " + mazoId));
     }
 
     @Override
@@ -62,5 +70,10 @@ public class MazoServiceImpl implements MazoService {
     @Override
     public Integer count() {
         return mazoRepository.countAllBy();
+    }
+
+    @Override
+    public Mazo clonarInicial() {
+        return Mazo.clonar(findById(1));
     }
 }

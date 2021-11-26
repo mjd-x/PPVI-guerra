@@ -1,19 +1,24 @@
 package ar.edu.fie.undef.donis_guerra.services;
 
 import ar.edu.fie.undef.donis_guerra.entities.Juego;
+import ar.edu.fie.undef.donis_guerra.entities.Mazo;
+import ar.edu.fie.undef.donis_guerra.exceptions.NotFoundException;
 import ar.edu.fie.undef.donis_guerra.repositories.JuegoRepository;
 import ar.edu.fie.undef.donis_guerra.requests.JuegoRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
 public class JuegoServiceImpl implements JuegoService {
     private final JuegoRepository juegoRepository;
+//    private final MazoService mazoService;
 
-    public JuegoServiceImpl(JuegoRepository juegoRepository) {
+    public JuegoServiceImpl(JuegoRepository juegoRepository/*, MazoService mazoService*/) {
         this.juegoRepository = juegoRepository;
+//        this.mazoService = mazoService;
     }
 
     @Override
@@ -22,8 +27,14 @@ public class JuegoServiceImpl implements JuegoService {
     }
 
     @Override
+    public Optional<Juego> findByIdOrNull(Integer juegoId) {
+        return juegoRepository.findById(juegoId);
+    }
+
+    @Override
     public Juego findById(Integer juegoId) {
-        return juegoRepository.findById(juegoId).get();
+        return findByIdOrNull(juegoId)
+                .orElseThrow(() -> new NotFoundException("No se encontro el juego " + juegoId));
     }
 
     @Override
@@ -35,6 +46,11 @@ public class JuegoServiceImpl implements JuegoService {
 
     @Override
     public Juego iniciarJuego(Integer juegoId) {
-        return juegoRepository.save(findById(juegoId).iniciarJuego());
+        // busca el juego
+        Juego juego = findById(juegoId);
+        // le asigna una copia del mazo inicial
+//        juego.setMazo(mazoService.clonarInicial());
+        //incia el juego
+        return juegoRepository.save(juego.iniciarJuego());
     }
 }

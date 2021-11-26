@@ -24,7 +24,7 @@ public class MazoInitializer implements InitializingBean {
     @Override
     public void afterPropertiesSet() throws Exception {
 
-        if (mazoService.count() == 0L) {
+        if (mazoService.count() == 0) {
             List<Carta> cartas = new ArrayList<>();
 
             for (int i=1 ; i < 13 ; i++) {
