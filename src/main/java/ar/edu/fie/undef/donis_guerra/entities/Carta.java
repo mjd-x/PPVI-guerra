@@ -52,12 +52,27 @@ public class Carta {
         this.palo = palo;
     }
 
+    //*****************************************************
+    // REPRESENTACIONES
+    //*****************************************************
+
+    /**
+     * Representacion de una carta
+     * @return CartaRepresentation
+     **/
     public CartaRepresentation representation() {
         return new CartaRepresentation(id, numero, palo);
     }
 
+    //*****************************************************
+    // LOGICA
+    //*****************************************************
+
+    /**
+     * Clona una lista de cartas
+     * @return lista clonada de cartas
+     **/
     public static List<Carta> clonar(List<Carta> cartas) {
-        // Clonar una lista de cartas
         // Utilizado al clonar un mazo
 
         Collections.shuffle(cartas);

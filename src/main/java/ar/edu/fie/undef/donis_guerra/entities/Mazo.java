@@ -56,15 +56,31 @@ public class Mazo {
         this.cartas = cartas;
     }
 
+    //*****************************************************
+    // REPRESENTACIONES
+    //*****************************************************
+
+    /**
+     * Representacion de un mazo
+     * @return MazoRepresentation
+     **/
     public MazoRepresentation representation() {
         return new MazoRepresentation(id, identificacion);
     }
 
+    //*****************************************************
+    // LOGICA
+    //*****************************************************
+
+    /**
+     * Mezcla y reparte el mazo entre la cantidad de jugadores
+     * @return lista con submazos de jugadores
+     **/
     public List<Mazo> repartir(Integer numeroJugadores) {
-        // mezcl las cartas
+        // mezcla las cartas
         Collections.shuffle(cartas);
 
-        // cast a float y redondeo por si no da entero el resultado
+        // cast a float y redondea por si no da entero el resultado
         float cantidad = cartas.size() / (float) numeroJugadores;
 
         // guava: partition Returns consecutive sublists of a list, each of the same size
@@ -79,24 +95,33 @@ public class Mazo {
         return mazos;
     }
 
+    /**
+     * Saca y devuelve la primera carta del mazo
+     * @return Carta
+     **/
     public Carta primeraCarta() {
         return cartas.remove(0);
     }
 
+    /**
+     * Indica si esta vacio un mazo
+     * @return boolean
+     **/
     public boolean estaVacio() {
         return cartas.size() == 0;
     }
 
-    // TODO agrega las cartas al principio de la lista
-    // porque los ordena por id
+    /**
+     * Agrega la lista de cartas al mazo
+     * @return Mazo
+     **/
     public Mazo agregarCartas(List<Carta> cartasAgregar) {
-        // agrega las cartas al mazo
         // mezcla
         Collections.shuffle(cartasAgregar);
 
         // si agrega las mismas cartas, tienen los ids mas bajos
         // y las agrega al principio del mazo (porque ordena por id)
-        // entonces necesito borrarlas y crearlas de vuelta
+        // entonces las borrarlas y crea de vuelta
         // con ids mas altos asi las agrega al final
 
         List<Carta> cartasNuevas = Carta.clonar(cartasAgregar);
@@ -105,6 +130,10 @@ public class Mazo {
         return this;
     }
 
+    /**
+     * Clona un mazo existente
+     * @return Mazo
+     **/
     public static Mazo clonar(Mazo mazo) {
         return new Mazo("mazo_juego", Carta.clonar(mazo.cartas));
     }

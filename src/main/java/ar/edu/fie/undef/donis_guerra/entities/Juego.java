@@ -90,15 +90,31 @@ public class Juego {
         this.jugadores = jugadores;
     }
 
+    //*****************************************************
+    // REPRESENTACIONES
+    //*****************************************************
+
+    /**
+     * Representacion de un juego
+     * @return JuegoRepresentation
+     **/
     public JuegoRepresentation representation() {
         return new JuegoRepresentation(id, identificacion);
     }
 
+    /**
+     * Muestra que se repartio el mazo
+     * @return JuegoMessageRepresentation
+     **/
     public JuegoMessageRepresentation iniciadoRepresentation() {
         return new JuegoMessageRepresentation("Se repartio el mazo entre los jugadores",
                 id, identificacion);
     }
 
+    /**
+     * Muestra el paso de un turno
+     * @return JuegoMessageRepresentation
+     **/
     public JuegoMessageRepresentation pasarTurnoRepresentation() {
         if (getJugadoresActivos().size() == 1) {
             return new JuegoMessageRepresentation(
@@ -114,10 +130,14 @@ public class Juego {
         }
     }
 
+    /**
+     * Muestra el paso de varios turnos
+     * @return JuegoMessageRepresentation
+     **/
     public JuegoMessageRepresentation pasarVariosTurnosRepresentation(Integer cantidad) {
         if (getJugadoresActivos().size() == 1) {
             return new JuegoMessageRepresentation(
-                    "No se paso ningun turno porque el juego ya termino." +
+                    "No se paso ningun turno porque el juego ya termino. " +
                             "El ganador de este juego es " + getJugadoresActivos().get(0).getNombre(),
                     id,
                     identificacion);
@@ -130,12 +150,26 @@ public class Juego {
         }
     }
 
+    //*****************************************************
+    // LOGICA
+    //*****************************************************
+
+    /**
+     * Devuelve los jugadores activos en un juego
+     * @return lista de jugadores activos
+     **/
     public List<Jugador> getJugadoresActivos() {
         return  jugadores.stream()
                 .filter(Jugador::isActivo)
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Inicia un juego existente repartiendo
+     * el mazo entre los jugadores y marcando
+     * a todos como activos
+     * @return Juego
+     **/
     public Juego iniciarJuego() {
         // marca todos los jugadores como activos (empiezan a jugar)
         jugadores.forEach(jugador -> jugador.setActivo(true));

@@ -66,10 +66,22 @@ public class Jugador {
         this.mazo = mazo;
     }
 
+    //*****************************************************
+    // REPRESENTACIONES
+    //*****************************************************
+
+    /**
+     * Representacion de un jugador
+     * @return JugadorRepresentation
+     **/
     public JugadorRepresentation representation() {
         return new JugadorRepresentation(id, nombre);
     }
 
+    /**
+     * Muestra la cantidad de cartas que tiene un jugador
+     * @return JugadorCartasRepresentation
+     **/
     public JugadorCartasRepresentation cartasRepresentation() {
         if (mazo == null) {
             // todavia no se inicio el juego
@@ -81,6 +93,7 @@ public class Jugador {
         }
 
         return new JugadorCartasRepresentation(
+                // ya tiene su submazo asignado (inicio el juego)
                 id,
                 nombre,
                 mazo.getCartas().size()

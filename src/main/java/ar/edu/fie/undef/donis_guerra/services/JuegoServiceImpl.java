@@ -42,6 +42,9 @@ public class JuegoServiceImpl implements JuegoService {
                 .orElseThrow(() -> new NotFoundException("No se encontro el juego " + juegoId));
     }
 
+    /**
+     * Busca los juegos que tienen un ganador
+     **/
     @Override
     public List<Juego> findAllByTerminado() {
         return juegoRepository.findAll()
@@ -49,6 +52,9 @@ public class JuegoServiceImpl implements JuegoService {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Clona el mazo inicial y lo carga como mazo del juego
+     **/
     @Override
     public Juego cargarMazo(Integer juegoId) {
         // clona el mazo incial en un juego
@@ -57,6 +63,9 @@ public class JuegoServiceImpl implements JuegoService {
         return juegoRepository.save(juego);
     }
 
+    /**
+     * Inicia un juego existente
+     **/
     @Override
     public Juego iniciarJuego(Integer juegoId) {
         // busca el juego y le carga el mazo inicial
@@ -66,11 +75,16 @@ public class JuegoServiceImpl implements JuegoService {
         return juegoRepository.save(juego.iniciarJuego());
     }
 
+    /**
+     * Pasa un turno en el juego, todos los jugadores sacan
+     * la primera carta de su mazo y el que tenga la mayor
+     * se guarda todas las cartas
+     **/
     @Override
     public Juego pasarTurno(Integer juegoId) {
         Juego juego = findById(juegoId);
 
-        // solo busca a los jugadores activos (todavia no perdieron)
+        // solo busca a los jugadores activos (los que todavia no perdieron)
         List<Jugador> jugadores = juego.getJugadoresActivos();
 
         // verifica si se termino el juego (1 solo jugador activo)
@@ -91,7 +105,7 @@ public class JuegoServiceImpl implements JuegoService {
         // paso el primero porque ya lo tome mas arriba
         jugadorIterator.next();
 
-        // cicla por todos los jugadores activos
+        // cicla por todos los demas jugadores activos
         while (jugadorIterator.hasNext()) {
             Jugador jugador = jugadorIterator.next();
 
@@ -115,21 +129,23 @@ public class JuegoServiceImpl implements JuegoService {
                 cartasJugadores.add(cartaActual);
             }
 
-            if (cartaActual.getNumero() > cartaMayor.getNumero()) {
+            // si otro jugador saca una carta mayor
+            // o durante el desempate el jugador que venia ganando se queda sin cartas
+            if (cartaActual.getNumero() > cartaMayor.getNumero()
+                    || jugadorGanador.getMazo().estaVacio())
+            {
                 // la carta de este jugador es mayor que la que esta ahora
                 // cambia el jugador y carta que esta ganando
                 cartaMayor = cartaActual;
 
                 // verifica si quien era el jugador ganador se quedo sin cartas
                 // (para caso de desempate donde se quedo sin cartas el que venia ganando)
-
                 if (jugadorGanador.getMazo().estaVacio()) {
                     jugadorGanador.setActivo(false);
                 }
 
                 // cambia el jugador que viene ganando
                 jugadorGanador = jugador;
-
             }
         }
 
@@ -137,17 +153,17 @@ public class JuegoServiceImpl implements JuegoService {
 
         // para agregar al mazo las cartas de la mesa
         // clona la lista de cartas y las agrega de vuelta para que esten en el fondo del mazo
-        // necesito borrar las cartas en cartasJugadores porque las clona cuando uso agregarCartas()
-        // si no las borro me quedan muchas cartas con mazo_id = null
-        // entonces las agrego a un mazo de descarte, y borro ese mazo para borrar las cartas que ya no uso
+        // necesita borrar las cartas en cartasJugadores porque las clona cuando usa agregarCartas()
+        // si no las borra, quedan muchas cartas con mazo_id = null
+        // entonces las agrega a un mazo de descarte, y borra ese mazo para sacar las cartas que ya no se usan
         Mazo mazoBorrar = mazoService.save(new Mazo("descarte", cartasJugadores));
 
         mazo.agregarCartas(cartasJugadores);
         mazoService.destroy(mazoBorrar.getId());
         jugadorGanador.setMazo(mazo);
 
+        // verifica si alguno perdio (saco su ultima carta)
         for (Jugador jugador : jugadores) {
-            // verifica si alguno perdio (saco su ultima carta)
             if (jugador.getMazo().estaVacio()) {
                 jugador.setActivo(false);
             }
@@ -156,6 +172,9 @@ public class JuegoServiceImpl implements JuegoService {
         return juegoRepository.save(juego);
     }
 
+    /**
+     * Pasar varios turnos seguidos
+     **/
     @Override
     public Juego pasarVariosTurnos(Integer juegoId, Integer cantidad) {
         Juego juego = findById(juegoId);
