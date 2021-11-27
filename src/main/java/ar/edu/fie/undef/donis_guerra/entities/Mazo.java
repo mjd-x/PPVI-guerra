@@ -74,19 +74,26 @@ public class Mazo {
         // crea lista de submazos para repartir con las cartas
         List<Mazo> mazos = new ArrayList<>();
         for (List<Carta> submazo : listas) {
+            Collections.shuffle(submazo);
             mazos.add(new Mazo("submazo_jugador", submazo));
         }
         return mazos;
     }
 
-    // TODO para armar el metodo del turno en JuegoServiceImpl
     public Carta primeraCarta() {
         return cartas.remove(0);
     }
 
-    // TODO para verificar si ya perdio el jugador en el metodo del turno en JuegoServiceImpl
-    public Integer getCantidadCartas() {
-        return cartas.size();
+    public boolean estaVacio() {
+        return cartas.size() == 0;
+    }
+
+    public Mazo agregarCartas(List<Carta> cartasNuevas) {
+        // agrego las cartas al mazo
+        Collections.shuffle(cartasNuevas);
+        cartas.addAll(cartasNuevas);
+
+        return this;
     }
 
     public static Mazo clonar(Mazo mazo) {

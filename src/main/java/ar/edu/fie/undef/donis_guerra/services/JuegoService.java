@@ -13,4 +13,5 @@ public interface JuegoService {
     Juego iniciarJuego(Integer juegoId);
     List<Juego> findAllByTerminado();
     Juego cargarMazo(Integer juegoId);
+    Juego pasarTurno(Integer juegoId);
 }

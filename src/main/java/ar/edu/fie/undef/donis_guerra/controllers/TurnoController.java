@@ -18,6 +18,7 @@ public class TurnoController {
         this.turnoService = turnoService;
     }
 
+    // Crear un turno
     @PostMapping("turnos")
     private ResponseEntity<TurnoRepresentation> create (@RequestBody TurnoRequest turno){
         return ResponseEntity.ok(
@@ -25,6 +26,7 @@ public class TurnoController {
         );
     }
 
+    // Buscar un turno
     @GetMapping("turnos/{turnoId}")
     private ResponseEntity<TurnoRepresentation> findById(@PathVariable Integer turnoId) {
         return ResponseEntity.ok(
@@ -32,6 +34,7 @@ public class TurnoController {
         );
     }
 
+    // Buscar turnos en un juego
     @GetMapping("juegos/{juegoId}/turnos")
     private ResponseEntity<List<TurnoRepresentation>> findByJuegoId(@PathVariable Integer juegoId) {
         return ResponseEntity.ok(

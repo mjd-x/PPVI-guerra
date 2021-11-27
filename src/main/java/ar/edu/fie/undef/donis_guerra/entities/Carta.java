@@ -1,6 +1,5 @@
 package ar.edu.fie.undef.donis_guerra.entities;
 
-import ar.edu.fie.undef.donis_guerra.entities.Palo;
 import ar.edu.fie.undef.donis_guerra.representations.CartaRepresentation;
 
 import javax.persistence.*;
@@ -9,6 +8,8 @@ import java.util.List;
 
 @Entity
 public class Carta {
+    // Cartas con un numero y palo que conforman un mazo
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -55,6 +56,9 @@ public class Carta {
     }
 
     public static List<Carta> clonar(List<Carta> cartas) {
+        // Clonar una lista de cartas
+        // Utilizado al clonar un mazo
+
         List<Carta> cartas_clone = new ArrayList<>();
 
         for (Carta carta : cartas) {

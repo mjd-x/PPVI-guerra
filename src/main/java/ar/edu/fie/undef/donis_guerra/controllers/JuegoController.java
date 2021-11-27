@@ -7,7 +7,6 @@ import ar.edu.fie.undef.donis_guerra.requests.JuegoRequest;
 import ar.edu.fie.undef.donis_guerra.services.JuegoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,6 +18,7 @@ public class JuegoController {
         this.juegoService = juegoService;
     }
 
+    // Crear un juego nuevo
     @PostMapping("juegos")
     private ResponseEntity<JuegoRepresentation> create (@RequestBody JuegoRequest juego){
         return ResponseEntity.ok(
@@ -26,6 +26,7 @@ public class JuegoController {
         );
     }
 
+    // Buscar un juego
     @GetMapping("juegos/{juegoId}")
     private ResponseEntity<JuegoRepresentation> findById(@PathVariable Integer juegoId) {
         return ResponseEntity.ok(
@@ -33,6 +34,7 @@ public class JuegoController {
         );
     }
 
+    // Buscar los juegos terminados
     @GetMapping("juegos/terminados")
     private ResponseEntity<List<JuegoRepresentation>> findAllByTerminado() {
         return ResponseEntity.ok(
@@ -41,10 +43,19 @@ public class JuegoController {
         );
     }
 
+    // Iniciar un juego que ya existe
     @PostMapping("juegos/{juegoId}/iniciar")
     private ResponseEntity<JuegoIniciadoRepresentation> iniciarJuego(@PathVariable Integer juegoId) {
         return ResponseEntity.ok(
                 juegoService.iniciarJuego(juegoId).iniciadoRepresentation()
+        );
+    }
+
+    // Pasar de turno
+    @PostMapping("juegos/{juegoId}/pasarTurno")
+    private ResponseEntity<JuegoRepresentation> pasarTurno(@PathVariable Integer juegoId) {
+        return ResponseEntity.ok(
+                juegoService.pasarTurno(juegoId).representation()
         );
     }
 }

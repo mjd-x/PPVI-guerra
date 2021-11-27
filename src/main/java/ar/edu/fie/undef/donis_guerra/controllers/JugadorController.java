@@ -17,6 +17,7 @@ public class JugadorController {
         this.jugadorService = jugadorService;
     }
 
+    // Crear un jugador
     @PostMapping("jugadores")
     private ResponseEntity<JugadorRepresentation> create(@RequestBody JugadorRequest jugador) {
         return ResponseEntity.ok(
@@ -24,6 +25,7 @@ public class JugadorController {
         );
     }
 
+    // Buscar un jugador
     @GetMapping("jugadores/{jugadorId}")
     private ResponseEntity<JugadorRepresentation> findById(@PathVariable Integer jugadorId) {
         return ResponseEntity.ok(
@@ -31,6 +33,7 @@ public class JugadorController {
         );
     }
 
+    // Filtrar jugadores activos/inactivos (todos)
     @GetMapping("jugadores")
     private ResponseEntity<List<JugadorRepresentation>> findAllByActivo(@RequestParam boolean activo) {
         return ResponseEntity.ok(
@@ -39,6 +42,7 @@ public class JugadorController {
         );
     }
 
+    // Buscar jugadores en un turno
     @GetMapping("turnos/{turnoId}/jugadores")
     private ResponseEntity<List<JugadorRepresentation>> findByTurnoId(@PathVariable Integer turnoId) {
         return ResponseEntity.ok(
@@ -47,6 +51,7 @@ public class JugadorController {
         );
     }
 
+    // Filtrar jugadores activos en un turno
     @GetMapping("turnos/{turnoId}/jugadores/activos/")
     private ResponseEntity<List<JugadorRepresentation>> findActivoByTurnoId(@PathVariable Integer turnoId) {
         return ResponseEntity.ok(
@@ -55,6 +60,7 @@ public class JugadorController {
         );
     }
 
+    // Buscar jugadores en un juego
     @GetMapping("juegos/{juegoId}/jugadores")
     private ResponseEntity<List<JugadorRepresentation>> findByJuegoId(@PathVariable Integer juegoId) {
         return ResponseEntity.ok(
@@ -63,6 +69,7 @@ public class JugadorController {
         );
     }
 
+    // Filtrar jugadores activos en un juego
     @GetMapping("juegos/{juegoId}/jugadores/activos")
     private ResponseEntity<List<JugadorRepresentation>> findActivoByJuegoId(@PathVariable Integer juegoId) {
         return ResponseEntity.ok(

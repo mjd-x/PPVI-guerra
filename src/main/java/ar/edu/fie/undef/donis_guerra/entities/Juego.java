@@ -99,9 +99,10 @@ public class Juego {
                 id, identificacion);
     }
 
-    public Integer getJugadoresActivos() {
-        return (int) jugadores.stream()
-                .filter(Jugador::isActivo).count();
+    public List<Jugador> getJugadoresActivos() {
+        return  jugadores.stream()
+                .filter(Jugador::isActivo)
+                .collect(Collectors.toList());
     }
 
     public Juego iniciarJuego() {
