@@ -2,7 +2,6 @@ package ar.edu.fie.undef.donis_guerra.entities;
 
 import ar.edu.fie.undef.donis_guerra.representations.JuegoRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.JuegoMessageRepresentation;
-
 import javax.persistence.*;
 import java.util.Iterator;
 import java.util.List;

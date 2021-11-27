@@ -28,9 +28,10 @@ public class MazoInitializer implements InitializingBean {
             List<Carta> cartas = new ArrayList<>();
 
             for (int i=1 ; i < 13 ; i++) {
-                for (Palo palo : Palo.values()) {
-                    cartas.add(new Carta(i, palo));
-                }
+//                for (Palo palo : Palo.values()) {
+//                    cartas.add(new Carta(i, palo));
+//                }
+                cartas.add(new Carta(i, Palo.BASTO));
             }
 
             Mazo mazo = new Mazo("mazo_base", cartas);

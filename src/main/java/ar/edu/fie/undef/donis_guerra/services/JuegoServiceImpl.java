@@ -84,13 +84,22 @@ public class JuegoServiceImpl implements JuegoService {
     public Juego pasarTurno(Integer juegoId) {
         Juego juego = findById(juegoId);
 
+        //*****************************************************************
+        // VERIFICA SI TERMINO EL JUEGO
+        //*****************************************************************
+
         // solo busca a los jugadores activos (los que todavia no perdieron)
         List<Jugador> jugadores = juego.getJugadoresActivos();
 
         // verifica si se termino el juego (1 solo jugador activo)
+        // en ese caso, no hace nada y muestra un mensaje de que el juego termino
         if (jugadores.size() == 1){
             return juego;
         }
+
+        //*****************************************************************
+        // INICIALIZA EL TURNO
+        //*****************************************************************
 
         // lista para guardar todas las primeras cartas de los jugadores
         // cuando termina el turno, el jugador ganador se guarda todas las cartas
@@ -98,8 +107,13 @@ public class JuegoServiceImpl implements JuegoService {
 
         // busca el primer jugador y su carta para comparar con el siguiente
         Carta cartaMayor = jugadores.get(0).getMazo().primeraCarta();
-        cartasJugadores.add(cartaMayor);
         Jugador jugadorGanador = jugadores.get(0);
+        // agrega la carta al loot del turno
+        cartasJugadores.add(cartaMayor);
+
+        //*****************************************************************
+        // EMPIEZA EL TURNO (COMPARA LAS CARTAS)
+        //*****************************************************************
 
         Iterator<Jugador> jugadorIterator = jugadores.iterator();
         // paso el primero porque ya lo tome mas arriba
@@ -114,28 +128,35 @@ public class JuegoServiceImpl implements JuegoService {
             // agrega la carta al loot del turno
             cartasJugadores.add(cartaActual);
 
-            // verifica si hay un empate (las dos cartas son del mismo valor)
+            //*****************************************************
+            // SI HAY EMPATE
+            //*****************************************************
+
+            // las dos cartas son del mismo valor
             // ademas verifica si durante el desempate algun jugador perdio (se quedo sin cartas)
             while (cartaMayor.getNumero().equals(cartaActual.getNumero())
                     && !jugadorGanador.getMazo().estaVacio()
                     && !jugador.getMazo().estaVacio())
             {
-                // hay un empate
                 // sigue sacando cartas de los dos jugadores empatados hasta que desempaten
                 cartaMayor = jugadorGanador.getMazo().primeraCarta();
                 cartaActual = jugador.getMazo().primeraCarta();
 
+                // agrega las dos cartas al loot del turno
                 cartasJugadores.add(cartaMayor);
                 cartasJugadores.add(cartaActual);
             }
 
-            // si otro jugador saca una carta mayor
-            // o durante el desempate el jugador que venia ganando se queda sin cartas
+            //*****************************************************
+            // SI UN JUGADOR SACO UNA CARTA MAS ALTA QUE LA INICIAL
+            //*****************************************************
+
+            // tambien verifica si durante el desempate el jugador que venia ganando se quedo sin cartas
             if (cartaActual.getNumero() > cartaMayor.getNumero()
                     || jugadorGanador.getMazo().estaVacio())
             {
-                // la carta de este jugador es mayor que la que esta ahora
-                // cambia el jugador y carta que esta ganando
+                // la carta de este jugador es mayor que la que esta ahora como mayor
+                // cambia la carta que esta ganando
                 cartaMayor = cartaActual;
 
                 // verifica si quien era el jugador ganador se quedo sin cartas
@@ -144,31 +165,40 @@ public class JuegoServiceImpl implements JuegoService {
                     jugadorGanador.setActivo(false);
                 }
 
-                // cambia el jugador que viene ganando
+                // cambia el jugador que viene ganando (que saco la carta mas alta)
                 jugadorGanador = jugador;
             }
         }
 
+        //*****************************************************************
+        // DESPUES DE COMPARAR LAS CARTAS DE TODOS LOS JUGADORES
+        //*****************************************************************
+
+        // busca el mazo del jugador que gano el turno (saco la carta mas alta)
         Mazo mazo = jugadorGanador.getMazo();
 
-        // para agregar al mazo las cartas de la mesa
+        // para agregar al mazo las cartas del loot
         // clona la lista de cartas y las agrega de vuelta para que esten en el fondo del mazo
         // necesita borrar las cartas en cartasJugadores porque las clona cuando usa agregarCartas()
         // si no las borra, quedan muchas cartas con mazo_id = null
         // entonces las agrega a un mazo de descarte, y borra ese mazo para sacar las cartas que ya no se usan
         Mazo mazoBorrar = mazoService.save(new Mazo("descarte", cartasJugadores));
 
+        // le agrega al mazo del ganador del turno las cartas del loot (clonadas al final de su mazo)
         mazo.agregarCartas(cartasJugadores);
-        mazoService.destroy(mazoBorrar.getId());
         jugadorGanador.setMazo(mazo);
 
-        // verifica si alguno perdio (saco su ultima carta)
+        // borra las cartas del loot viejo (con los ids mas bajos)
+        mazoService.destroy(mazoBorrar.getId());
+
+        // verifica si algun jugador perdio (saco su ultima carta del mazo)
         for (Jugador jugador : jugadores) {
             if (jugador.getMazo().estaVacio()) {
                 jugador.setActivo(false);
             }
         }
 
+        // guarda lo que paso en el turno
         return juegoRepository.save(juego);
     }
 

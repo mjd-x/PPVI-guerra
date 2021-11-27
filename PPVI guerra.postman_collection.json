@@ -71,41 +71,6 @@
 						}
 					},
 					"response": []
-				},
-				{
-					"name": "mezclar mazo",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"identificacion\": \"test\",\r\n    \"cartas\": [{\"numero\": 1, \"palo\": \"ORO\"}, {\"numero\": 11, \"palo\": \"BASTO\"}]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:9090/mazos/:id/mezclar",
-							"host": [
-								"localhost"
-							],
-							"port": "9090",
-							"path": [
-								"mazos",
-								":id",
-								"mezclar"
-							],
-							"variable": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
 				}
 			]
 		},
@@ -310,44 +275,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": null
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "jugadores activos",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"nombre\": \"persona2\",\r\n    \"activo\": true,\r\n    \"mazo\": {\r\n            \"identificacion\": \"segundo_mazo_jugador\",\r\n            \"cartas\": [{\"numero\": 12, \"palo\": \"ESPADA\"}, {\"numero\": 12, \"palo\": \"COPA\"}]\r\n    }\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:9090/jugadores/?activo=false",
-							"host": [
-								"localhost"
-							],
-							"port": "9090",
-							"path": [
-								"jugadores",
-								""
-							],
-							"query": [
-								{
-									"key": "activo",
-									"value": "false"
+									"value": "2"
 								}
 							]
 						}
@@ -479,7 +407,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/turnos/:id/jugadores/activos/?activo=true",
+							"raw": "localhost:9090/turnos/:id/jugadores/activos",
 							"host": [
 								"localhost"
 							],
@@ -488,19 +416,333 @@
 								"turnos",
 								":id",
 								"jugadores",
-								"activos",
-								""
-							],
-							"query": [
-								{
-									"key": "activo",
-									"value": "true"
-								}
+								"activos"
 							],
 							"variable": [
 								{
 									"key": "id",
 									"value": "2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "juegos",
+			"item": [
+				{
+					"name": "juegos",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"juego1\",\r\n    \"jugadores\": [\r\n                    {\r\n                        \"nombre\": \"jug1_juego1\"\r\n                    },\r\n                    {\r\n                       \"nombre\": \"jug2_juego1\"\r\n                    },\r\n                    {\r\n                       \"nombre\": \"jug3_juego1\"\r\n                    },\r\n                    {\r\n                       \"nombre\": \"jug4_juego1\"\r\n                    }\r\n                 ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/juegos",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"juegos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "juegos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"juego_test_1\",\r\n    \"turnos\": [],\r\n    \"mazo\": {},\r\n    \"jugadores\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/juegos/:id",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"juegos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "33"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "jugadores en juego",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"juego_test_1\",\r\n    \"turnos\": [],\r\n    \"mazo\": {},\r\n    \"jugadores\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/juegos/:id/jugadores",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"juegos",
+								":id",
+								"jugadores"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "jugadores activos en juego",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"juego_test_1\",\r\n    \"turnos\": [],\r\n    \"mazo\": {},\r\n    \"jugadores\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/juegos/:id/jugadores/activos",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"juegos",
+								":id",
+								"jugadores",
+								"activos"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "turnos en juego",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"juego_test_1\",\r\n    \"turnos\": [],\r\n    \"mazo\": {},\r\n    \"jugadores\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/juegos/:id/turnos",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"juegos",
+								":id",
+								"turnos"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "34"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "juegos terminados",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"juego_test_1\",\r\n    \"turnos\": [],\r\n    \"mazo\": {},\r\n    \"jugadores\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/juegos/terminados",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"juegos",
+								"terminados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "iniciar juego",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"juego_test_nested3\",\r\n    \"mazo\": {\r\n                \"identificacion\": \"mazo_juego_nested3\",\r\n                \"cartas\": [\r\n                    {\"numero\": 12, \"palo\": \"ORO\"}, \r\n                    {\"numero\": 10, \"palo\": \"BASTO\"},\r\n                    {\"numero\": 6, \"palo\": \"COPA\"},\r\n                    {\"numero\": 7, \"palo\": \"ORO\"},\r\n                    {\"numero\": 11, \"palo\": \"ESPADA\"},\r\n                    {\"numero\": 10, \"palo\": \"COPA\"}\r\n                          ]\r\n            },\r\n    \"jugadores\": [\r\n                    {\r\n                        \"nombre\": \"test1_nested3\",\r\n                        \"activo\": true\r\n                    },\r\n                    {\r\n                       \"nombre\": \"test2_nested3\",\r\n                       \"activo\": false\r\n                    }\r\n                 ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/juegos/:id/iniciar",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"juegos",
+								":id",
+								"iniciar"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pasar turno de juego",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"juego_test_nested3\",\r\n    \"mazo\": {\r\n                \"identificacion\": \"mazo_juego_nested3\",\r\n                \"cartas\": [\r\n                    {\"numero\": 12, \"palo\": \"ORO\"}, \r\n                    {\"numero\": 10, \"palo\": \"BASTO\"},\r\n                    {\"numero\": 6, \"palo\": \"COPA\"},\r\n                    {\"numero\": 7, \"palo\": \"ORO\"},\r\n                    {\"numero\": 11, \"palo\": \"ESPADA\"},\r\n                    {\"numero\": 10, \"palo\": \"COPA\"}\r\n                          ]\r\n            },\r\n    \"jugadores\": [\r\n                    {\r\n                        \"nombre\": \"test1_nested3\",\r\n                        \"activo\": true\r\n                    },\r\n                    {\r\n                       \"nombre\": \"test2_nested3\",\r\n                       \"activo\": false\r\n                    }\r\n                 ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/juegos/:id/pasarTurno",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"juegos",
+								":id",
+								"pasarTurno"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "pasar varios turnos de un juego",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"identificacion\": \"juego_test_nested3\",\r\n    \"mazo\": {\r\n                \"identificacion\": \"mazo_juego_nested3\",\r\n                \"cartas\": [\r\n                    {\"numero\": 12, \"palo\": \"ORO\"}, \r\n                    {\"numero\": 10, \"palo\": \"BASTO\"},\r\n                    {\"numero\": 6, \"palo\": \"COPA\"},\r\n                    {\"numero\": 7, \"palo\": \"ORO\"},\r\n                    {\"numero\": 11, \"palo\": \"ESPADA\"},\r\n                    {\"numero\": 10, \"palo\": \"COPA\"}\r\n                          ]\r\n            },\r\n    \"jugadores\": [\r\n                    {\r\n                        \"nombre\": \"test1_nested3\",\r\n                        \"activo\": true\r\n                    },\r\n                    {\r\n                       \"nombre\": \"test2_nested3\",\r\n                       \"activo\": false\r\n                    }\r\n                 ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9090/juegos/:id/pasarTurno/5",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"juegos",
+								":id",
+								"pasarTurno",
+								"5"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "1"
 								}
 							]
 						}
