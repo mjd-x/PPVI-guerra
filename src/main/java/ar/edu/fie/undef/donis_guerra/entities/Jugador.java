@@ -1,5 +1,6 @@
 package ar.edu.fie.undef.donis_guerra.entities;
 
+import ar.edu.fie.undef.donis_guerra.representations.JugadorCartasRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.JugadorRepresentation;
 
 import javax.persistence.*;
@@ -67,5 +68,22 @@ public class Jugador {
 
     public JugadorRepresentation representation() {
         return new JugadorRepresentation(id, nombre);
+    }
+
+    public JugadorCartasRepresentation cartasRepresentation() {
+        if (mazo == null) {
+            // todavia no se inicio el juego
+            return new JugadorCartasRepresentation(
+                    id,
+                    nombre,
+                    0
+            );
+        }
+
+        return new JugadorCartasRepresentation(
+                id,
+                nombre,
+                mazo.getCartas().size()
+        );
     }
 }

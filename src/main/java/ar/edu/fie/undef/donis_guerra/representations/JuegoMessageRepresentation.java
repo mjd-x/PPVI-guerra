@@ -1,22 +1,22 @@
 package ar.edu.fie.undef.donis_guerra.representations;
 
-public class MazoMezcladoRepresentation {
-    private String message;
+public class JuegoMessageRepresentation {
+    private String mensaje;
     private Integer id;
     private String identificacion;
 
-    public MazoMezcladoRepresentation(String message, Integer id, String identificacion) {
-        this.message = message;
+    public JuegoMessageRepresentation(String mensaje, Integer id, String identificacion) {
+        this.mensaje = mensaje;
         this.id = id;
         this.identificacion = identificacion;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMensaje() {
+        return mensaje;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 
     public Integer getId() {

@@ -53,4 +53,9 @@ public class MazoServiceImpl implements MazoService {
     public Mazo clonarInicial() {
         return Mazo.clonar(findById(1));
     }
+
+    @Override
+    public void destroy(Integer mazoId) {
+        mazoRepository.delete(findById(mazoId));
+    }
 }

@@ -1,6 +1,5 @@
 package ar.edu.fie.undef.donis_guerra.entities;
 
-import ar.edu.fie.undef.donis_guerra.representations.MazoMezcladoRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.MazoRepresentation;
 import com.google.common.collect.Lists;
 
@@ -90,9 +89,17 @@ public class Mazo {
 
     // TODO agrega las cartas al principio de la lista
     // porque los ordena por id
-    public Mazo agregarCartas(List<Carta> cartasNuevas) {
-        // agrego las cartas al mazo
-        Collections.shuffle(cartasNuevas);
+    public Mazo agregarCartas(List<Carta> cartasAgregar) {
+        // agrega las cartas al mazo
+        // mezcla
+        Collections.shuffle(cartasAgregar);
+
+        // si agrega las mismas cartas, tienen los ids mas bajos
+        // y las agrega al principio del mazo (porque ordena por id)
+        // entonces necesito borrarlas y crearlas de vuelta
+        // con ids mas altos asi las agrega al final
+
+        List<Carta> cartasNuevas = Carta.clonar(cartasAgregar);
         cartas.addAll(cartasNuevas);
 
         return this;

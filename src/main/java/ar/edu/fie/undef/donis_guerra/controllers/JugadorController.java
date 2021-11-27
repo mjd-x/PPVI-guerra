@@ -1,6 +1,7 @@
 package ar.edu.fie.undef.donis_guerra.controllers;
 
 import ar.edu.fie.undef.donis_guerra.entities.Jugador;
+import ar.edu.fie.undef.donis_guerra.representations.JugadorCartasRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.JugadorRepresentation;
 import ar.edu.fie.undef.donis_guerra.requests.JugadorRequest;
 import ar.edu.fie.undef.donis_guerra.services.JugadorService;
@@ -62,10 +63,10 @@ public class JugadorController {
 
     // Buscar jugadores en un juego
     @GetMapping("juegos/{juegoId}/jugadores")
-    private ResponseEntity<List<JugadorRepresentation>> findByJuegoId(@PathVariable Integer juegoId) {
+    private ResponseEntity<List<JugadorCartasRepresentation>> findByJuegoId(@PathVariable Integer juegoId) {
         return ResponseEntity.ok(
                 jugadorService.findByJuegoId(juegoId).stream()
-                        .map(Jugador::representation).collect(Collectors.toList())
+                        .map(Jugador::cartasRepresentation).collect(Collectors.toList())
         );
     }
 

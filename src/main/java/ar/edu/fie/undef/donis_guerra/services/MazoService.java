@@ -14,4 +14,5 @@ public interface MazoService {
     Mazo save(Mazo mazo);
     Integer count();
     Mazo clonarInicial();
+    void destroy(Integer mazoId);
 }

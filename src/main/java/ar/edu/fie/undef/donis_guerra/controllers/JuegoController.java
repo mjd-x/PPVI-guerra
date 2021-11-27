@@ -1,8 +1,8 @@
 package ar.edu.fie.undef.donis_guerra.controllers;
 
 import ar.edu.fie.undef.donis_guerra.entities.Juego;
-import ar.edu.fie.undef.donis_guerra.representations.JuegoIniciadoRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.JuegoRepresentation;
+import ar.edu.fie.undef.donis_guerra.representations.JuegoMessageRepresentation;
 import ar.edu.fie.undef.donis_guerra.requests.JuegoRequest;
 import ar.edu.fie.undef.donis_guerra.services.JuegoService;
 import org.springframework.http.ResponseEntity;
@@ -45,7 +45,7 @@ public class JuegoController {
 
     // Iniciar un juego que ya existe
     @PostMapping("juegos/{juegoId}/iniciar")
-    private ResponseEntity<JuegoIniciadoRepresentation> iniciarJuego(@PathVariable Integer juegoId) {
+    private ResponseEntity<JuegoMessageRepresentation> iniciarJuego(@PathVariable Integer juegoId) {
         return ResponseEntity.ok(
                 juegoService.iniciarJuego(juegoId).iniciadoRepresentation()
         );
@@ -53,18 +53,18 @@ public class JuegoController {
 
     // Pasar de turno
     @PostMapping("juegos/{juegoId}/pasarTurno")
-    private ResponseEntity<JuegoRepresentation> pasarTurno(@PathVariable Integer juegoId) {
+    private ResponseEntity<JuegoMessageRepresentation> pasarTurno(@PathVariable Integer juegoId) {
         return ResponseEntity.ok(
-                juegoService.pasarTurno(juegoId).representation()
+                juegoService.pasarTurno(juegoId).pasarTurnoRepresentation()
         );
     }
 
     // Pasar de turno
     @PostMapping("juegos/{juegoId}/pasarTurno/{cantidad}")
-    private ResponseEntity<JuegoRepresentation> pasarVariosTurnos(@PathVariable Integer juegoId,
-                                                           @PathVariable Integer cantidad) {
+    private ResponseEntity<JuegoMessageRepresentation> pasarVariosTurnos(@PathVariable Integer juegoId,
+                                                                         @PathVariable Integer cantidad) {
         return ResponseEntity.ok(
-                juegoService.pasarVariosTurnos(juegoId, cantidad).representation()
+                juegoService.pasarVariosTurnos(juegoId, cantidad).pasarVariosTurnosRepresentation(cantidad)
         );
     }
 }

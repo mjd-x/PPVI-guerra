@@ -66,9 +66,6 @@ public class JuegoServiceImpl implements JuegoService {
         return juegoRepository.save(juego.iniciarJuego());
     }
 
-    // TODO nunca termina el juego porque me ordena automaticamente las listas por id
-    // como se crean en orden del 1 al 12 siempre termina ciclando porque tienen las cartas ordenadas
-
     @Override
     public Juego pasarTurno(Integer juegoId) {
         Juego juego = findById(juegoId);
@@ -122,19 +119,39 @@ public class JuegoServiceImpl implements JuegoService {
                 // la carta de este jugador es mayor que la que esta ahora
                 // cambia el jugador y carta que esta ganando
                 cartaMayor = cartaActual;
+
+                // verifica si quien era el jugador ganador se quedo sin cartas
+                // (para caso de desempate donde se quedo sin cartas el que venia ganando)
+
+                if (jugadorGanador.getMazo().estaVacio()) {
+                    jugadorGanador.setActivo(false);
+                }
+
+                // cambia el jugador que viene ganando
                 jugadorGanador = jugador;
 
             }
+        }
 
+        Mazo mazo = jugadorGanador.getMazo();
+
+        // para agregar al mazo las cartas de la mesa
+        // clona la lista de cartas y las agrega de vuelta para que esten en el fondo del mazo
+        // necesito borrar las cartas en cartasJugadores porque las clona cuando uso agregarCartas()
+        // si no las borro me quedan muchas cartas con mazo_id = null
+        // entonces las agrego a un mazo de descarte, y borro ese mazo para borrar las cartas que ya no uso
+        Mazo mazoBorrar = mazoService.save(new Mazo("descarte", cartasJugadores));
+
+        mazo.agregarCartas(cartasJugadores);
+        mazoService.destroy(mazoBorrar.getId());
+        jugadorGanador.setMazo(mazo);
+
+        for (Jugador jugador : jugadores) {
             // verifica si alguno perdio (saco su ultima carta)
             if (jugador.getMazo().estaVacio()) {
                 jugador.setActivo(false);
             }
         }
-
-        Mazo mazo = jugadorGanador.getMazo();
-        mazo.agregarCartas(cartasJugadores);
-        jugadorGanador.setMazo(mazo);
 
         return juegoRepository.save(juego);
     }

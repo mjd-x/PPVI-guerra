@@ -1,7 +1,7 @@
 package ar.edu.fie.undef.donis_guerra.entities;
 
-import ar.edu.fie.undef.donis_guerra.representations.JuegoIniciadoRepresentation;
 import ar.edu.fie.undef.donis_guerra.representations.JuegoRepresentation;
+import ar.edu.fie.undef.donis_guerra.representations.JuegoMessageRepresentation;
 
 import javax.persistence.*;
 import java.util.Iterator;
@@ -94,9 +94,40 @@ public class Juego {
         return new JuegoRepresentation(id, identificacion);
     }
 
-    public JuegoIniciadoRepresentation iniciadoRepresentation() {
-        return new JuegoIniciadoRepresentation("Se repartio el mazo entre los jugadores",
+    public JuegoMessageRepresentation iniciadoRepresentation() {
+        return new JuegoMessageRepresentation("Se repartio el mazo entre los jugadores",
                 id, identificacion);
+    }
+
+    public JuegoMessageRepresentation pasarTurnoRepresentation() {
+        if (getJugadoresActivos().size() == 1) {
+            return new JuegoMessageRepresentation(
+                    "No se paso ningun turno porque el juego ya termino." +
+                            "El ganador de este juego es " + getJugadoresActivos().get(0).getNombre(),
+                    id,
+                    identificacion);
+        } else {
+            return new JuegoMessageRepresentation(
+                    "Paso un turno, quedan " + getJugadoresActivos().size() + " jugadores activos",
+                    id,
+                    identificacion);
+        }
+    }
+
+    public JuegoMessageRepresentation pasarVariosTurnosRepresentation(Integer cantidad) {
+        if (getJugadoresActivos().size() == 1) {
+            return new JuegoMessageRepresentation(
+                    "No se paso ningun turno porque el juego ya termino." +
+                            "El ganador de este juego es " + getJugadoresActivos().get(0).getNombre(),
+                    id,
+                    identificacion);
+        } else {
+            return new JuegoMessageRepresentation(
+                    "Pasaron " + cantidad + " turnos, quedan "
+                            + getJugadoresActivos().size() + " jugadores activos",
+                    id,
+                    identificacion);
+        }
     }
 
     public List<Jugador> getJugadoresActivos() {
