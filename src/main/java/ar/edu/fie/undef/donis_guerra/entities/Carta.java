@@ -4,6 +4,7 @@ import ar.edu.fie.undef.donis_guerra.representations.CartaRepresentation;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Entity
@@ -59,6 +60,7 @@ public class Carta {
         // Clonar una lista de cartas
         // Utilizado al clonar un mazo
 
+        Collections.shuffle(cartas);
         List<Carta> cartas_clone = new ArrayList<>();
 
         for (Carta carta : cartas) {

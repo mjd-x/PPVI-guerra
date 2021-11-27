@@ -88,6 +88,8 @@ public class Mazo {
         return cartas.size() == 0;
     }
 
+    // TODO agrega las cartas al principio de la lista
+    // porque los ordena por id
     public Mazo agregarCartas(List<Carta> cartasNuevas) {
         // agrego las cartas al mazo
         Collections.shuffle(cartasNuevas);

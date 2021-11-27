@@ -138,4 +138,16 @@ public class JuegoServiceImpl implements JuegoService {
 
         return juegoRepository.save(juego);
     }
+
+    @Override
+    public Juego pasarVariosTurnos(Integer juegoId, Integer cantidad) {
+        Juego juego = findById(juegoId);
+
+        // pasa la cantidad de turnos que mando
+        for (int i = 0; i < cantidad ; i++) {
+            pasarTurno(juegoId);
+        }
+
+        return juego;
+    }
 }
