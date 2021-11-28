@@ -163,6 +163,10 @@ public class Juego {
                 .collect(Collectors.toList());
     }
 
+    public boolean isTerminado() {
+        return getJugadoresActivos().size() == 0;
+    }
+
     /**
      * Inicia un juego existente repartiendo
      * el mazo entre los jugadores y marcando

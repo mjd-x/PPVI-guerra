@@ -2,7 +2,6 @@ package ar.edu.fie.undef.donis_guerra.controllers;
 
 import ar.edu.fie.undef.donis_guerra.entities.Turno;
 import ar.edu.fie.undef.donis_guerra.representations.TurnoRepresentation;
-import ar.edu.fie.undef.donis_guerra.requests.TurnoRequest;
 import ar.edu.fie.undef.donis_guerra.services.TurnoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,14 +15,6 @@ public class TurnoController {
 
     public TurnoController(TurnoService turnoService) {
         this.turnoService = turnoService;
-    }
-
-    // Crear un turno
-    @PostMapping("turnos")
-    private ResponseEntity<TurnoRepresentation> create (@RequestBody TurnoRequest turno){
-        return ResponseEntity.ok(
-                turnoService.create(turno).representation()
-        );
     }
 
     // Buscar un turno
@@ -40,6 +31,24 @@ public class TurnoController {
         return ResponseEntity.ok(
                 turnoService.findByJuegoId(juegoId).stream()
                         .map(Turno::representation).collect(Collectors.toList())
+        );
+    }
+
+    // Pasar de turno
+    @PostMapping("juegos/{juegoId}/pasarTurno")
+    private ResponseEntity<TurnoRepresentation> pasarTurno(@PathVariable Integer juegoId) {
+        return ResponseEntity.ok(
+                turnoService.pasarTurno(juegoId).representation()
+        );
+    }
+
+    // Pasar de turno
+    @PostMapping("juegos/{juegoId}/pasarTurno/{cantidad}")
+    private ResponseEntity<List<TurnoRepresentation>> pasarVariosTurnos(@PathVariable Integer juegoId,
+                                                                        @PathVariable Integer cantidad) {
+        return ResponseEntity.ok(
+                turnoService.pasarVariosTurnos(juegoId, cantidad)
+                .stream().map(Turno::representation).collect(Collectors.toList())
         );
     }
 }

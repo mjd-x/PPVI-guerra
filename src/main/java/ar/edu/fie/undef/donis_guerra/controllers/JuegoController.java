@@ -50,21 +50,4 @@ public class JuegoController {
                 juegoService.iniciarJuego(juegoId).iniciadoRepresentation()
         );
     }
-
-    // Pasar de turno
-    @PostMapping("juegos/{juegoId}/pasarTurno")
-    private ResponseEntity<JuegoMessageRepresentation> pasarTurno(@PathVariable Integer juegoId) {
-        return ResponseEntity.ok(
-                juegoService.pasarTurno(juegoId).pasarTurnoRepresentation()
-        );
-    }
-
-    // Pasar de turno
-    @PostMapping("juegos/{juegoId}/pasarTurno/{cantidad}")
-    private ResponseEntity<JuegoMessageRepresentation> pasarVariosTurnos(@PathVariable Integer juegoId,
-                                                                         @PathVariable Integer cantidad) {
-        return ResponseEntity.ok(
-                juegoService.pasarVariosTurnos(juegoId, cantidad).pasarVariosTurnosRepresentation(cantidad)
-        );
-    }
 }

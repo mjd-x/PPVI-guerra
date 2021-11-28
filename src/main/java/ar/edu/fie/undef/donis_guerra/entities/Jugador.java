@@ -4,6 +4,7 @@ import ar.edu.fie.undef.donis_guerra.representations.JugadorCartasRepresentation
 import ar.edu.fie.undef.donis_guerra.representations.JugadorRepresentation;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class Jugador {
@@ -98,5 +99,24 @@ public class Jugador {
                 nombre,
                 mazo.getCartas().size()
         );
+    }
+
+    //*****************************************************
+    // LOGICA
+    //*****************************************************
+
+    /**
+     * Verifica si en una lista de jugadores alguno
+     * tiene el mazo vacio, y en ese caso lo marca como inactivo
+     * @return Lista de jugadores
+     **/
+    public static List<Jugador> verificarPerdedores(List<Jugador> jugadores) {
+        for (Jugador jugador : jugadores) {
+            if (jugador.getMazo().estaVacio()) {
+                jugador.activo = false;
+            }
+        }
+
+        return jugadores;
     }
 }
