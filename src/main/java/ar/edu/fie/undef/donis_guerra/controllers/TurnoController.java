@@ -46,8 +46,11 @@ public class TurnoController {
     @PostMapping("juegos/{juegoId}/pasarTurno/{cantidad}")
     private ResponseEntity<TurnoRepresentation> pasarVariosTurnos(@PathVariable Integer juegoId,
                                                                   @PathVariable Integer cantidad) {
+        // lo hago aparte para saber el tamaño de la lista de turnos creados
+        // puede ser menor que cantidad porque en el medio puede terminar el juego
+        List<Turno> turnos = turnoService.pasarVariosTurnos(juegoId, cantidad);
         return ResponseEntity.ok(
-                turnoService.pasarVariosTurnos(juegoId, cantidad).get(cantidad-1).pasarVariosRepresentation(cantidad)
+                turnos.get(turnos.size()-1).pasarVariosRepresentation(cantidad)
         );
     }
 }

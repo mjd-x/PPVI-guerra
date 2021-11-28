@@ -95,9 +95,9 @@ public class Turno {
      * @return TurnoRepresentation
      **/
     public TurnoRepresentation representation() {
-        if (jugadores.size() == 1) {
+        if (jugadoresActivos == 1) {
             return new TurnoRepresentation(
-                    "No paso ningun turno porque el juego ya termino",
+                    "El juego termino",
                     id,
                     identificacion,
                     jugadoresActivos,
@@ -115,9 +115,9 @@ public class Turno {
     }
 
     public TurnoRepresentation pasarVariosRepresentation(Integer cantidad) {
-        if (jugadores.size() == 1) {
+        if (jugadoresActivos == 1) {
             return new TurnoRepresentation(
-                    "No paso ningun turno porque el juego ya termino",
+                    "El juego termino",
                     id,
                     identificacion,
                     jugadoresActivos,

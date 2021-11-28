@@ -36,19 +36,22 @@ public class TurnoServiceImpl implements TurnoService {
         return juegoService.findById(juegoId).getTurnos();
     }
 
+
     /**
      * Pasa un turno en el juego, todos los jugadores sacan
      * la primera carta de su mazo y el que tenga la mayor
      * se guarda todas las cartas
      **/
     @Override
-    public Turno pasarTurno(Integer juegoId) {
+    public Optional<Turno> pasarTurnoOrNull(Integer juegoId) {
         Juego juego = juegoService.findById(juegoId);
         List<Jugador> jugadores = juego.getJugadoresActivos();
 
         if (juego.isTerminado()) {
             // si se termino el juego, no pasa de turno (avisa en la representation)
-            return null;
+
+            // TODO esto esta bien?
+            return Optional.empty();
         } else {
 
             Turno turno = new Turno("turno_juego" + juegoId, jugadores);
@@ -61,8 +64,17 @@ public class TurnoServiceImpl implements TurnoService {
 
             juegoService.save(juego);
 
-            return turno;
+            // TODO esto esta bien?
+            return Optional.of(turno);
         }
+    }
+
+    @Override
+    public Turno pasarTurno(Integer juegoId) {
+        // uso un optional porque sino sigue pasando de turno
+        // aunque el juego ya haya terminado
+        return pasarTurnoOrNull(juegoId)
+                .orElseThrow(() -> new NotFoundException("El juego " + juegoId + " ya termino"));
     }
 
     /**

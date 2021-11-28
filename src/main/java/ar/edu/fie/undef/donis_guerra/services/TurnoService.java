@@ -8,6 +8,7 @@ public interface TurnoService {
     Optional<Turno> findByIdOrNull(Integer turnoId);
     Turno findById(Integer turnoId);
     List<Turno> findByJuegoId(Integer juegoId);
+    Optional<Turno> pasarTurnoOrNull(Integer juegoId);
     Turno pasarTurno(Integer juegoId);
     List<Turno> pasarVariosTurnos(Integer juegoId, Integer cantidad);
 }
