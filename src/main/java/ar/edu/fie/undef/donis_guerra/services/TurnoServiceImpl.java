@@ -70,10 +70,14 @@ public class TurnoServiceImpl implements TurnoService {
      **/
     @Override
     public List<Turno> pasarVariosTurnos(Integer juegoId, Integer cantidad) {
+        Juego juego = juegoService.findById(juegoId);
         List<Turno> turnos = new ArrayList<>();
 
         // pasa la cantidad de turnos que mando
         for (int i = 0; i < cantidad ; i++) {
+            if (juego.isTerminado()) {
+                break;
+            }
             turnos.add(pasarTurno(juegoId));
         }
 

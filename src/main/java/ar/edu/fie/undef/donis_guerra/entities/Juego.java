@@ -163,8 +163,13 @@ public class Juego {
                 .collect(Collectors.toList());
     }
 
+    /**
+     * Indica si un juego ya se termino
+     * verificando la cantidad de jugadores activos
+     * @return boolean
+     **/
     public boolean isTerminado() {
-        return jugadores.size() == 1;
+        return getJugadoresActivos().size() == 1;
     }
 
     /**
