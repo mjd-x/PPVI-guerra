@@ -53,7 +53,7 @@ public class JugadorController {
     }
 
     // Filtrar jugadores activos en un turno
-    @GetMapping("turnos/{turnoId}/jugadores/activos/")
+    @GetMapping("turnos/{turnoId}/jugadores/activos")
     private ResponseEntity<List<JugadorRepresentation>> findActivoByTurnoId(@PathVariable Integer turnoId) {
         return ResponseEntity.ok(
                 jugadorService.findActivoByTurnoId(turnoId).

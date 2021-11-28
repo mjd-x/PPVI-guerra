@@ -26,6 +26,10 @@ public class Turno {
     @JoinColumn(name = "ganador_id")
     private Jugador jugadorGanador;
 
+    private String nombreGanador;
+
+    private Long jugadoresActivos;
+
     public Turno() {
     }
 
@@ -74,6 +78,14 @@ public class Turno {
         this.jugadorGanador = jugadorGanador;
     }
 
+    public Long getJugadoresActivos() {
+        return jugadoresActivos;
+    }
+
+    public void setJugadoresActivos(Long jugadoresActivos) {
+        this.jugadoresActivos = jugadoresActivos;
+    }
+
     //*****************************************************
     // REPRESENTACIONES
     //*****************************************************
@@ -85,19 +97,40 @@ public class Turno {
     public TurnoRepresentation representation() {
         if (jugadores.size() == 1) {
             return new TurnoRepresentation(
-                    "No se paso ningun turno porque el juego ya termino. " +
-                            "El ganador de este juego es " + jugadores.get(0).getNombre(),
-                    jugadores.get(0).getNombre(),
+                    "No se paso ningun turno porque el juego ya termino",
                     id,
-                    identificacion);
+                    identificacion,
+                    jugadoresActivos,
+                    nombreGanador
+            );
         } else {
             return new TurnoRepresentation(
-                    "Paso un turno, quedan " +
-                            (int) jugadores.stream().filter(Jugador::isActivo).count()
-                            + " jugadores activos",
-                    jugadorGanador.getNombre(),
+                    "Paso un turno",
                     id,
-                    identificacion);
+                    identificacion,
+                    jugadoresActivos,
+                    nombreGanador
+            );
+        }
+    }
+
+    public TurnoRepresentation pasarVariosRepresentation(Integer cantidad) {
+        if (jugadores.size() == 1) {
+            return new TurnoRepresentation(
+                    "No se paso ningun turno porque el juego ya termino",
+                    id,
+                    identificacion,
+                    jugadoresActivos,
+                    nombreGanador
+            );
+        } else {
+            return new TurnoRepresentation(
+                    "Pasaron " + cantidad + " turnos",
+                    id,
+                    identificacion,
+                    jugadoresActivos,
+                    nombreGanador
+            );
         }
     }
 
@@ -124,8 +157,7 @@ public class Turno {
      * @return boolean
      **/
     public boolean hayCartaMayor(Carta cartaMayor, Carta cartaActual, Jugador jugadorGanador) {
-        return cartaActual.getNumero() > cartaMayor.getNumero()
-                || jugadorGanador.getMazo().estaVacio();
+        return cartaActual.getNumero() > cartaMayor.getNumero();
     }
 
     /**
@@ -177,13 +209,12 @@ public class Turno {
             // SI UN JUGADOR SACO UNA CARTA MAS ALTA QUE LA INICIAL
             //*****************************************************
 
-            // tambien verifica si durante el desempate el jugador que venia ganando se quedo sin cartas
             if (hayCartaMayor(cartaMayor, cartaActual, jugador)) {
                 // la carta de este jugador es mayor que la que esta ahora como mayor
                 // cambia la carta que esta ganando
                 cartaMayor = cartaActual;
 
-                // verifica si quien era el jugador ganador se quedo sin cartas
+                // verifica si quien era el jugador ganador (que ahora perdio) se quedo sin cartas
                 // (para caso de desempate donde se quedo sin cartas el que venia ganando)
                 if (jugadorGanador.getMazo().estaVacio()) {
                     jugadorGanador.setActivo(false);
@@ -203,9 +234,13 @@ public class Turno {
         // le agrega al mazo del ganador del turno las cartas del loot (clonadas al final de su mazo)
         mazo.agregarCartas(cartasTurno);
         jugadorGanador.setMazo(mazo);
+        // guardo el nombre del ganador (para mostrar mas adelante)
+        nombreGanador = jugadorGanador.getNombre();
 
         // verifica si algun jugador perdio (saco su ultima carta del mazo)
         Jugador.verificarPerdedores(jugadores);
+
+        jugadoresActivos = jugadores.stream().filter(Jugador::isActivo).count();
 
         return this;
     }

@@ -44,11 +44,10 @@ public class TurnoController {
 
     // Pasar de turno
     @PostMapping("juegos/{juegoId}/pasarTurno/{cantidad}")
-    private ResponseEntity<List<TurnoRepresentation>> pasarVariosTurnos(@PathVariable Integer juegoId,
-                                                                        @PathVariable Integer cantidad) {
+    private ResponseEntity<TurnoRepresentation> pasarVariosTurnos(@PathVariable Integer juegoId,
+                                                                  @PathVariable Integer cantidad) {
         return ResponseEntity.ok(
-                turnoService.pasarVariosTurnos(juegoId, cantidad)
-                .stream().map(Turno::representation).collect(Collectors.toList())
+                turnoService.pasarVariosTurnos(juegoId, cantidad).get(cantidad-1).pasarVariosRepresentation(cantidad)
         );
     }
 }

@@ -53,7 +53,7 @@ public class TurnoServiceImpl implements TurnoService {
 
             Turno turno = new Turno("turno_juego" + juegoId, jugadores);
             turno.pasarTurno();
-            turnoRepository.save(turno);
+            turno = turnoRepository.save(turno);
 
             List<Turno> turnos = juego.getTurnos();
             turnos.add(turno);

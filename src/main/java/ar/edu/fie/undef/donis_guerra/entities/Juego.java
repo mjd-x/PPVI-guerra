@@ -164,7 +164,7 @@ public class Juego {
     }
 
     public boolean isTerminado() {
-        return getJugadoresActivos().size() == 0;
+        return jugadores.size() == 1;
     }
 
     /**
