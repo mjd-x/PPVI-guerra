@@ -156,7 +156,7 @@ public class Turno {
      * durante el desempate
      * @return boolean
      **/
-    public boolean hayCartaMayor(Carta cartaMayor, Carta cartaActual, Jugador jugadorGanador) {
+    public boolean hayCartaMayor(Carta cartaMayor, Carta cartaActual) {
         return cartaActual.getNumero() > cartaMayor.getNumero();
     }
 
@@ -209,7 +209,7 @@ public class Turno {
             // SI UN JUGADOR SACO UNA CARTA MAS ALTA QUE LA INICIAL
             //*****************************************************
 
-            if (hayCartaMayor(cartaMayor, cartaActual, jugador)) {
+            if (hayCartaMayor(cartaMayor, cartaActual)) {
                 // la carta de este jugador es mayor que la que esta ahora como mayor
                 // cambia la carta que esta ganando
                 cartaMayor = cartaActual;
