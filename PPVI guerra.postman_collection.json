@@ -289,33 +289,6 @@
 			"item": [
 				{
 					"name": "turnos",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"identificacion\": \"test_turno_2\",\r\n    \"jugadores\": [\r\n                    {\r\n                        \"nombre\": \"persona3\",\r\n                        \"activo\": true,\r\n                        \"mazo\": {\r\n                            \"identificacion\": \"tercer_mazo_jugador\",\r\n                            \"cartas\": [{\"numero\": 12, \"palo\": \"ESPADA\"}, {\"numero\": 12, \"palo\": \"COPA\"}]\r\n                                }\r\n                    },\r\n                    {\r\n                        \"nombre\": \"persona4\",\r\n                        \"activo\": false,\r\n                        \"mazo\": {\r\n                            \"identificacion\": \"cuarto_mazo_jugador\",\r\n                            \"cartas\": [{\"numero\": 5, \"palo\": \"ESPADA\"}, {\"numero\": 6, \"palo\": \"BASTO\"}]\r\n                                }\r\n                    }\r\n    ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:9090/turnos",
-							"host": [
-								"localhost"
-							],
-							"port": "9090",
-							"path": [
-								"turnos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "turnos",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},

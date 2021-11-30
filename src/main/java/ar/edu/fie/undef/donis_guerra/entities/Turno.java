@@ -78,6 +78,14 @@ public class Turno {
         this.jugadorGanador = jugadorGanador;
     }
 
+    public String getNombreGanador() {
+        return nombreGanador;
+    }
+
+    public void setNombreGanador(String nombreGanador) {
+        this.nombreGanador = nombreGanador;
+    }
+
     public Long getJugadoresActivos() {
         return jugadoresActivos;
     }

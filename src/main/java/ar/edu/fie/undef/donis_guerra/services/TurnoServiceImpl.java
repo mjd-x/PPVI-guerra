@@ -49,8 +49,6 @@ public class TurnoServiceImpl implements TurnoService {
 
         if (juego.isTerminado()) {
             // si se termino el juego, no pasa de turno (avisa en la representation)
-
-            // TODO esto esta bien?
             return Optional.empty();
         } else {
 
@@ -64,7 +62,6 @@ public class TurnoServiceImpl implements TurnoService {
 
             juegoService.save(juego);
 
-            // TODO esto esta bien?
             return Optional.of(turno);
         }
     }
