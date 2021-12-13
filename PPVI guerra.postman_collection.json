@@ -23,11 +23,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/mazos",
+							"raw": "{{baseUrl}}/mazos",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"mazos"
 							]
@@ -53,11 +52,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/mazos/:id",
+							"raw": "{{baseUrl}}/mazos/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"mazos",
 								":id"
@@ -78,33 +76,6 @@
 			"name": "cartas",
 			"item": [
 				{
-					"name": "cartas",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"identificacion\": \"test\",\r\n    \"cartas\": {\"numero\": 1, \"palo\": \"ORO\"}, {\"nuemero\": 11, \"palo\": \"BASTO\"}\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "localhost:9090/mazos",
-							"host": [
-								"localhost"
-							],
-							"port": "9090",
-							"path": [
-								"mazos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "cartas en mazo",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
@@ -122,11 +93,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/mazos/:id/cartas",
+							"raw": "{{baseUrl}}/mazos/:id/cartas",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"mazos",
 								":id",
@@ -162,11 +132,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/jugadores",
+							"raw": "{{baseUrl}}/jugadores",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"jugadores"
 							]
@@ -192,11 +161,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/jugadores/:id",
+							"raw": "{{baseUrl}}/jugadores/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"jugadores",
 								":id"
@@ -229,11 +197,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/jugadores/1/mazo",
+							"raw": "{{baseUrl}}/jugadores/1/mazo",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"jugadores",
 								"1",
@@ -261,11 +228,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/jugadores/:id/mazo/cartas",
+							"raw": "{{baseUrl}}/jugadores/:id/mazo/cartas",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"jugadores",
 								":id",
@@ -305,11 +271,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/turnos/:id",
+							"raw": "{{baseUrl}}/turnos/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"turnos",
 								":id"
@@ -342,11 +307,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/turnos/:id/jugadores",
+							"raw": "{{baseUrl}}/turnos/:id/jugadores",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"turnos",
 								":id",
@@ -363,7 +327,7 @@
 					"response": []
 				},
 				{
-					"name": "jugadores activos en turno",
+					"name": "jugadores que perdieron en turno",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -380,21 +344,25 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/turnos/:id/jugadores/activos",
+							"raw": "{{baseUrl}}/turnos/:id/jugadores?activo=false",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"turnos",
 								":id",
-								"jugadores",
-								"activos"
+								"jugadores"
+							],
+							"query": [
+								{
+									"key": "activo",
+									"value": "false"
+								}
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "2"
+									"value": "3"
 								}
 							]
 						}
@@ -421,11 +389,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/juegos",
+							"raw": "{{baseUrl}}/juegos",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"juegos"
 							]
@@ -451,11 +418,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/juegos/:id",
+							"raw": "{{baseUrl}}/juegos/:id",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"juegos",
 								":id"
@@ -488,11 +454,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/juegos/:id/jugadores",
+							"raw": "{{baseUrl}}/juegos/:id/jugadores",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"juegos",
 								":id",
@@ -526,16 +491,20 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/juegos/:id/jugadores/activos",
+							"raw": "{{baseUrl}}/juegos/:id/jugadores?activo=true",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"juegos",
 								":id",
-								"jugadores",
-								"activos"
+								"jugadores"
+							],
+							"query": [
+								{
+									"key": "activo",
+									"value": "true"
+								}
 							],
 							"variable": [
 								{
@@ -565,11 +534,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/juegos/:id/turnos",
+							"raw": "{{baseUrl}}/juegos/:id/turnos",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"juegos",
 								":id",
@@ -578,7 +546,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "34"
+									"value": "1"
 								}
 							]
 						}
@@ -603,14 +571,19 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/juegos/terminados",
+							"raw": "{{baseUrl}}/juegos/?terminado=true",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"juegos",
-								"terminados"
+								""
+							],
+							"query": [
+								{
+									"key": "terminado",
+									"value": "true"
+								}
 							]
 						}
 					},
@@ -631,15 +604,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/juegos/:id/iniciar",
+							"raw": "{{baseUrl}}/juegos/:id/inicio",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"juegos",
 								":id",
-								"iniciar"
+								"inicio"
 							],
 							"variable": [
 								{
@@ -666,15 +638,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/juegos/:id/pasarTurno",
+							"raw": "{{baseUrl}}/juegos/:id/turno",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"juegos",
 								":id",
-								"pasarTurno"
+								"turno"
 							],
 							"variable": [
 								{
@@ -701,16 +672,20 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:9090/juegos/:id/pasarTurno/5",
+							"raw": "{{baseUrl}}/juegos/:id/turno?cantidad=5",
 							"host": [
-								"localhost"
+								"{{baseUrl}}"
 							],
-							"port": "9090",
 							"path": [
 								"juegos",
 								":id",
-								"pasarTurno",
-								"5"
+								"turno"
+							],
+							"query": [
+								{
+									"key": "cantidad",
+									"value": "5"
+								}
 							],
 							"variable": [
 								{
@@ -723,6 +698,32 @@
 					"response": []
 				}
 			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8001"
 		}
 	]
 }
