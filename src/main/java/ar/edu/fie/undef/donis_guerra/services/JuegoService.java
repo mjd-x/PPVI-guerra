@@ -11,7 +11,7 @@ public interface JuegoService {
     Optional<Juego> findByIdOrNull(Integer juegoId);
     Juego findById(Integer juegoId);
     Juego iniciarJuego(Integer juegoId);
-    List<Juego> findAllByTerminado();
+    List<Juego> findAllByTerminado(boolean terminado);
     Juego cargarMazo(Integer juegoId);
     Juego save(Juego juego);
 }

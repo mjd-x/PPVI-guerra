@@ -35,16 +35,17 @@ public class JuegoController {
     }
 
     // Buscar los juegos terminados
-    @GetMapping("juegos/terminados")
-    private ResponseEntity<List<JuegoRepresentation>> findAllByTerminado() {
+    @GetMapping("juegos")
+    private ResponseEntity<List<JuegoRepresentation>> findAllByTerminado(
+            @RequestParam boolean terminado) {
         return ResponseEntity.ok(
-                juegoService.findAllByTerminado().stream()
+                juegoService.findAllByTerminado(terminado).stream()
                         .map(Juego::representation).collect(Collectors.toList())
         );
     }
 
     // Iniciar un juego que ya existe
-    @PostMapping("juegos/{juegoId}/iniciar")
+    @PostMapping("juegos/{juegoId}/inicio")
     private ResponseEntity<JuegoMessageRepresentation> iniciarJuego(@PathVariable Integer juegoId) {
         return ResponseEntity.ok(
                 juegoService.iniciarJuego(juegoId).iniciadoRepresentation()

@@ -43,10 +43,17 @@ public class JuegoServiceImpl implements JuegoService {
      * Busca los juegos que tienen un ganador
      **/
     @Override
-    public List<Juego> findAllByTerminado() {
-        return juegoRepository.findAll()
-                .stream().filter(juego -> juego.getJugadoresActivos().size() == 1)
-                .collect(Collectors.toList());
+    public List<Juego> findAllByTerminado(boolean terminado) {
+        if (terminado) {
+            return juegoRepository.findAll()
+                    .stream().filter(juego -> juego.getJugadoresActivos().size() == 1)
+                    .collect(Collectors.toList());
+        } else
+        {
+            return juegoRepository.findAll()
+                    .stream().filter(juego -> juego.getJugadoresActivos().size() != 1)
+                    .collect(Collectors.toList());
+        }
     }
 
     /**

@@ -8,6 +8,7 @@ import ar.edu.fie.undef.donis_guerra.services.JugadorService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -45,37 +46,37 @@ public class JugadorController {
 
     // Buscar jugadores en un turno
     @GetMapping("turnos/{turnoId}/jugadores")
-    private ResponseEntity<List<JugadorRepresentation>> findByTurnoId(@PathVariable Integer turnoId) {
-        return ResponseEntity.ok(
-                jugadorService.findByTurnoId(turnoId).stream()
-                        .map(Jugador::representation).collect(Collectors.toList())
-        );
-    }
-
-    // Filtrar jugadores activos en un turno
-    @GetMapping("turnos/{turnoId}/jugadores/activos")
-    private ResponseEntity<List<JugadorRepresentation>> findActivoByTurnoId(@PathVariable Integer turnoId) {
-        return ResponseEntity.ok(
-                jugadorService.findActivoByTurnoId(turnoId).
-                        stream().map(Jugador::representation).collect(Collectors.toList())
-        );
+    private ResponseEntity<List<JugadorRepresentation>> findByTurnoId(@PathVariable Integer turnoId,
+                                                                      @RequestParam Optional<Boolean> activo) {
+        if (activo.isPresent()) {
+            // mostrar jugadores activos
+            return ResponseEntity.ok(
+                    jugadorService.findActivoByTurnoId(turnoId, activo.get()).
+                            stream().map(Jugador::representation).collect(Collectors.toList())
+            );
+        } else {
+            // mostrar jugadores
+            return ResponseEntity.ok(
+                    jugadorService.findByTurnoId(turnoId).stream()
+                            .map(Jugador::representation).collect(Collectors.toList())
+            );
+        }
     }
 
     // Buscar jugadores en un juego
     @GetMapping("juegos/{juegoId}/jugadores")
-    private ResponseEntity<List<JugadorCartasRepresentation>> findByJuegoId(@PathVariable Integer juegoId) {
-        return ResponseEntity.ok(
-                jugadorService.findByJuegoId(juegoId).stream()
-                        .map(Jugador::cartasRepresentation).collect(Collectors.toList())
-        );
-    }
-
-    // Filtrar jugadores activos en un juego
-    @GetMapping("juegos/{juegoId}/jugadores/activos")
-    private ResponseEntity<List<JugadorRepresentation>> findActivoByJuegoId(@PathVariable Integer juegoId) {
-        return ResponseEntity.ok(
-                jugadorService.findActivobyJuegoId(juegoId).stream()
-                        .map(Jugador::representation).collect(Collectors.toList())
-        );
+    private ResponseEntity<List<JugadorCartasRepresentation>> findByJuegoId(@PathVariable Integer juegoId,
+                                                                            @RequestParam Optional<Boolean> activo) {
+        if (activo.isPresent()) {
+            return ResponseEntity.ok(
+                    jugadorService.findActivobyJuegoId(juegoId, activo.get()).
+                            stream().map(Jugador::cartasRepresentation).collect(Collectors.toList())
+            );
+        } else {
+            return ResponseEntity.ok(
+                    jugadorService.findByJuegoId(juegoId).stream()
+                            .map(Jugador::cartasRepresentation).collect(Collectors.toList())
+            );
+        }
     }
 }

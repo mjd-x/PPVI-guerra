@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -35,22 +36,20 @@ public class TurnoController {
     }
 
     // Pasar de turno
-    @PostMapping("juegos/{juegoId}/pasarTurno")
-    private ResponseEntity<TurnoRepresentation> pasarTurno(@PathVariable Integer juegoId) {
-        return ResponseEntity.ok(
-                turnoService.pasarTurno(juegoId).representation()
-        );
-    }
-
-    // Pasar de turno
-    @PostMapping("juegos/{juegoId}/pasarTurno/{cantidad}")
+    @PostMapping("juegos/{juegoId}/turno")
     private ResponseEntity<TurnoRepresentation> pasarVariosTurnos(@PathVariable Integer juegoId,
-                                                                  @PathVariable Integer cantidad) {
-        // lo hago aparte para saber el tamaño de la lista de turnos creados
-        // puede ser menor que cantidad porque en el medio puede terminar el juego
-        List<Turno> turnos = turnoService.pasarVariosTurnos(juegoId, cantidad);
-        return ResponseEntity.ok(
-                turnos.get(turnos.size()-1).pasarVariosRepresentation(cantidad)
-        );
+                                                                  @RequestParam Optional<Integer> cantidad) {
+        if (cantidad.isPresent()) {
+            // lo hago aparte para saber el tamaño de la lista de turnos creados
+            // puede ser menor que cantidad porque en el medio puede terminar el juego
+            List<Turno> turnos = turnoService.pasarVariosTurnos(juegoId, cantidad.get());
+            return ResponseEntity.ok(
+                    turnos.get(turnos.size()-1).pasarVariosRepresentation(cantidad.get())
+            );
+        } else {
+            return ResponseEntity.ok(
+                    turnoService.pasarTurno(juegoId).representation()
+            );
+        }
     }
 }

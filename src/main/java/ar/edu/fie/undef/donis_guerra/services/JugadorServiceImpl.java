@@ -49,10 +49,10 @@ public class JugadorServiceImpl implements JugadorService {
     }
 
     @Override
-    public List<Jugador> findActivoByTurnoId(Integer turnoId) {
+    public List<Jugador> findActivoByTurnoId(Integer turnoId, Boolean activo) {
         List<Jugador> jugadores = findByTurnoId(turnoId);
         return jugadores.stream()
-                .filter(Jugador::isActivo)
+                .filter(jugador -> jugador.isActivo() == activo)
                 .collect(Collectors.toList());
     }
 
@@ -62,10 +62,10 @@ public class JugadorServiceImpl implements JugadorService {
     }
 
     @Override
-    public List<Jugador> findActivobyJuegoId(Integer juegoId) {
+    public List<Jugador> findActivobyJuegoId(Integer juegoId, Boolean activo) {
         List<Jugador> jugadores = findByJuegoId(juegoId);
         return jugadores.stream()
-                .filter(Jugador::isActivo)
+                .filter(jugador -> jugador.isActivo() == activo)
                 .collect(Collectors.toList());
     }
 
