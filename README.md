@@ -1,5 +1,7 @@
 ### donis_guerra 
 
+https://hub.docker.com/r/mjdx/guerra/tags
+
 # Reglas
 * Se reparte el mazo entre todos los jugadores
 * En cada turno, todos los jugadores sacan la primer carta de su mazo y la muestran
@@ -39,9 +41,11 @@ la cantidad de turnos que se desean pasar.
 
 ```
 POST /juegos/<id>/turno
+```
 
 o
 
+```
 POST /juegos/<id>/turno?cantidad=<int>
 ```
 
