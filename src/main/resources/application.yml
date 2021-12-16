@@ -1,12 +1,6 @@
 server:
   port: 8001
 spring:
-#  datasource:
-#    driver-class-name: org.h2.Driver
-#    url: jdbc:h2:file:./donis_guerra;AUTO_SERVER=TRUE
-#  jpa:
-#    hibernate:
-#      ddl-auto: create-drop
   datasource:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://35.223.54.93:5432/guerra
@@ -14,7 +8,7 @@ spring:
     password: informatica2021
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
