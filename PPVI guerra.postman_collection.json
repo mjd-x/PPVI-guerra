@@ -381,7 +381,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"identificacion\": \"juego1\",\r\n    \"jugadores\": [\r\n                    {\r\n                        \"nombre\": \"jug1_juego1\"\r\n                    },\r\n                    {\r\n                       \"nombre\": \"jug2_juego1\"\r\n                    },\r\n                    {\r\n                       \"nombre\": \"jug3_juego1\"\r\n                    },\r\n                    {\r\n                       \"nombre\": \"jug4_juego1\"\r\n                    }\r\n                 ]\r\n}",
+							"raw": "{\r\n    \"identificacion\": \"juego_ejemplo\",\r\n    \"jugadores\": [\r\n                    {\r\n                        \"nombre\": \"ejemplo_jugador1\"\r\n                    },\r\n                    {\r\n                       \"nombre\": \"ejemplo_jugador2\"\r\n                    },\r\n                    {\r\n                       \"nombre\": \"ejemplo_jugador3\"\r\n                    },\r\n                    {\r\n                       \"nombre\": \"ejemplo_jugador4\"\r\n                    }\r\n                 ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -546,7 +546,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -571,13 +571,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{baseUrl}}/juegos/?terminado=true",
+							"raw": "{{baseUrl}}/juegos?terminado=true",
 							"host": [
 								"{{baseUrl}}"
 							],
 							"path": [
-								"juegos",
-								""
+								"juegos"
 							],
 							"query": [
 								{
@@ -594,15 +593,6 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"identificacion\": \"juego_test_nested3\",\r\n    \"mazo\": {\r\n                \"identificacion\": \"mazo_juego_nested3\",\r\n                \"cartas\": [\r\n                    {\"numero\": 12, \"palo\": \"ORO\"}, \r\n                    {\"numero\": 10, \"palo\": \"BASTO\"},\r\n                    {\"numero\": 6, \"palo\": \"COPA\"},\r\n                    {\"numero\": 7, \"palo\": \"ORO\"},\r\n                    {\"numero\": 11, \"palo\": \"ESPADA\"},\r\n                    {\"numero\": 10, \"palo\": \"COPA\"}\r\n                          ]\r\n            },\r\n    \"jugadores\": [\r\n                    {\r\n                        \"nombre\": \"test1_nested3\",\r\n                        \"activo\": true\r\n                    },\r\n                    {\r\n                       \"nombre\": \"test2_nested3\",\r\n                       \"activo\": false\r\n                    }\r\n                 ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{baseUrl}}/juegos/:id/inicio",
 							"host": [
@@ -616,7 +606,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -628,15 +618,6 @@
 					"request": {
 						"method": "POST",
 						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"identificacion\": \"juego_test_nested3\",\r\n    \"mazo\": {\r\n                \"identificacion\": \"mazo_juego_nested3\",\r\n                \"cartas\": [\r\n                    {\"numero\": 12, \"palo\": \"ORO\"}, \r\n                    {\"numero\": 10, \"palo\": \"BASTO\"},\r\n                    {\"numero\": 6, \"palo\": \"COPA\"},\r\n                    {\"numero\": 7, \"palo\": \"ORO\"},\r\n                    {\"numero\": 11, \"palo\": \"ESPADA\"},\r\n                    {\"numero\": 10, \"palo\": \"COPA\"}\r\n                          ]\r\n            },\r\n    \"jugadores\": [\r\n                    {\r\n                        \"nombre\": \"test1_nested3\",\r\n                        \"activo\": true\r\n                    },\r\n                    {\r\n                       \"nombre\": \"test2_nested3\",\r\n                       \"activo\": false\r\n                    }\r\n                 ]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
 							"raw": "{{baseUrl}}/juegos/:id/turno",
 							"host": [
@@ -650,7 +631,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -690,7 +671,7 @@
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						}
@@ -723,6 +704,10 @@
 	"variable": [
 		{
 			"key": "baseUrl",
+			"value": "http://34.68.159.28:8001"
+		},
+		{
+			"key": "localUrl",
 			"value": "http://localhost:8001"
 		}
 	]
